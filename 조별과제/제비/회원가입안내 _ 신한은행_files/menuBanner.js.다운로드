@@ -1,0 +1,5 @@
+shbComm.menu2DepthClick = function(className) {
+	if (className.indexOf("banner0101") >= 0) {
+		shbComm.goPage("010515000000");
+	}
+};

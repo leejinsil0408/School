@@ -1,0 +1,767 @@
+if (typeof hpeComm == "undefined") hpeComm = {};
+
+hpeComm.FILE_UPLOAD_URL = "/hpe/common/uploadobject.jsp";
+hpeComm = {};
+//websquare log로 기록
+hpeComm.log = function(e){
+	WebSquare.logger.printLog(e);
+};
+ 
+/**
+ * 단건 업로드를 진행한다.
+ **/
+hpeComm.fileUpload = function(objUpload, actionOption) {
+	hpeComm.log( "**************************************************************************" );
+	hpeComm.log( "hpeComm.fileUpload 시작" );
+	hpeComm.log( "**************************************************************************" );
+	
+	if ( objUpload.getActionUrl() == "" ) {
+		shbComm.alert("분류 Sub Directory는 필수입니다.");
+		return;
+	}
+	
+	if ( jsonLib.isNullObj( actionOption ) ) { 
+		shbComm.alert("actionOption중 CALLBACK은 필수입니다.");
+		return; 
+	}
+	
+	if ( strLib.isEmpty( actionOption.callBack ) ) { 
+		shbComm.alert("actionOption중 CALLBACK은 필수입니다.");
+		return;
+	}
+	
+	var action = hpeComm.FILE_UPLOAD_URL + "?" + objUpload.getActionUrl() + "&CALLBACK=" + actionOption.callBack;
+	
+	hpeComm.log( "**************************************************************************" );
+	hpeComm.log( "action : " + action );
+	hpeComm.log( "**************************************************************************" );
+	objUpload.changeFormAction(action);
+	objUpload.submit();
+};
+
+
+
+hpeComm.menu = {
+	currentMenuInfo : null
+};
+
+
+/**
+ * PWM index.jsp에서 메인페이 이동시 기본메뉴등록
+* Function description...
+* @date 2017. 3. 21.
+* @memberOf 
+* @param {Object} argument
+* @returns {Object} 
+* @author 0069-0321
+* @example
+* @since
+ */
+hpeComm.menu.initMenuInfoPWM = function () {
+	top.window._PAGEINFO_LIST = {'500000000000' : {C_SYS_ID:"50"
+			, DEF_MY_MENU_YN:""
+			, DEPTH:"1"
+			, DEPTH1_MENU_SEQ:"50"
+			, DEPTH2_MENU_SEQ:"0"
+			, DEPTH3_MENU_SEQ:"0"
+			, DEPTH4_MENU_SEQ:"0"
+			, DEPTH5_MENU_SEQ:"0"
+			, DEPTH6_MENU_SEQ:"0"
+			, DISPLAY_G:"Y"
+			, ETC_DATA1:""
+			, ETC_DATA2:""
+			, ETC_DATA3:""
+			, ETC_DATA4:""
+			, ETC_DATA5:""
+			, ETC_NUM1:""
+			, ETC_NUM2:""
+			, ETC_NUM3:""
+			, ETC_NUM4:""
+			, ETC_NUM5:""
+			, LOGIN_G:"N"
+			, MENU_AUTH:""
+			, MENU_CODE:"500000000000"
+			, MENU_G:"M"
+			, MENU_NAME:"PWM"
+			, MENU_URL:"/pwm/PW01/PW01000RM00.xml"
+			, MY_MENU_YN:""
+			, NEW_WINDOW_YN:"N"
+			, OPEN_SEQ:"3"
+			, PARENT_MENU_CODE:""
+			, QUICK_MENU_YN:"N"
+			, REG_DATE:""
+			, REG_ID:""
+			, REG_TIME:""
+			, SERVICE_ED_TM:""
+			, SERVICE_ST_TM:""
+			, SESSION_TIME:"1"
+			, SITE_OPEN_YN:"Y"
+			, TAB_G:"N"
+			, TAB_SEQ:""
+			, UPT_DATE:""
+			, UPT_ID:""
+			, UPT_TIME:""
+			, VIEW_END_DT:"99991231000000"
+			, VIEW_REG_DT:"20161201000000"
+			, VIEW_YN:"Y"
+	}};
+};
+
+
+/**
+ * VOSTRO index.jsp에서 메인페이 이동시 기본메뉴등록
+* Function description...
+* @date 2017. 3. 21.
+* @memberOf 
+* @param {Object} argument
+* @returns {Object} 
+* @author 0069-0321
+* @example
+* @since
+ */
+hpeComm.menu.initMenuInfoVOSTRO = function () {
+	top.window._PAGEINFO_LIST = {'500000000000' : {C_SYS_ID:"50"
+			, DEF_MY_MENU_YN:""
+			, DEPTH:"1"
+			, DEPTH1_MENU_SEQ:"50"
+			, DEPTH2_MENU_SEQ:"0"
+			, DEPTH3_MENU_SEQ:"0"
+			, DEPTH4_MENU_SEQ:"0"
+			, DEPTH5_MENU_SEQ:"0"
+			, DEPTH6_MENU_SEQ:"0"
+			, DISPLAY_G:"Y"
+			, ETC_DATA1:""
+			, ETC_DATA2:""
+			, ETC_DATA3:""
+			, ETC_DATA4:""
+			, ETC_DATA5:""
+			, ETC_NUM1:""
+			, ETC_NUM2:""
+			, ETC_NUM3:""
+			, ETC_NUM4:""
+			, ETC_NUM5:""
+			, LOGIN_G:"N"
+			, MENU_AUTH:""
+			, MENU_CODE:"500000000000"
+			, MENU_G:"M"
+			, MENU_URL:"/vostro/VS01/VS01000RM00.xml"
+			, MY_MENU_YN:""
+			, NEW_WINDOW_YN:"N"
+			, OPEN_SEQ:"3"
+			, PARENT_MENU_CODE:""
+			, QUICK_MENU_YN:"N"
+			, REG_DATE:""
+			, REG_ID:""
+			, REG_TIME:""
+			, SERVICE_ED_TM:""
+			, SERVICE_ST_TM:""
+			, SESSION_TIME:"1"
+			, SITE_OPEN_YN:"Y"
+			, TAB_G:"N"
+			, TAB_SEQ:""
+			, UPT_DATE:""
+			, UPT_ID:""
+			, UPT_TIME:""
+			, VIEW_END_DT:"99991231000000"
+			, VIEW_REG_DT:"20161201000000"
+			, VIEW_YN:"Y"
+	}};
+}; 
+
+
+/**
+ * Premier index.jsp에서 메인페이 이동시 기본메뉴등록
+* Function description...
+* @date 2017. 3. 21.
+* @memberOf 
+* @param {Object} argument
+* @returns {Object} 
+* @author 0069-0321
+* @example
+* @since
+ */
+hpeComm.menu.initMenuInfoPREMIER = function () {
+	top.window._PAGEINFO_LIST = {'400000000000' : {C_SYS_ID:"40"
+			, DEF_MY_MENU_YN:""
+			, DEPTH:"1"
+			, DEPTH1_MENU_SEQ:"40"
+			, DEPTH2_MENU_SEQ:"0"
+			, DEPTH3_MENU_SEQ:"0"
+			, DEPTH4_MENU_SEQ:"0"
+			, DEPTH5_MENU_SEQ:"0"
+			, DEPTH6_MENU_SEQ:"0"
+			, DISPLAY_G:"Y"
+			, ETC_DATA1:""
+			, ETC_DATA2:""
+			, ETC_DATA3:""
+			, ETC_DATA4:""
+			, ETC_DATA5:""
+			, ETC_NUM1:""
+			, ETC_NUM2:""
+			, ETC_NUM3:""
+			, ETC_NUM4:""
+			, ETC_NUM5:""
+			, LOGIN_G:"N"
+			, MENU_AUTH:""
+			, MENU_CODE:"400000000000"
+			, MENU_G:"M"
+			, MENU_URL:"/premier/PR01/PR01000RM00.xml"
+			, MY_MENU_YN:""
+			, NEW_WINDOW_YN:"N"
+			, OPEN_SEQ:"3"
+			, PARENT_MENU_CODE:""
+			, QUICK_MENU_YN:"N"
+			, REG_DATE:""
+			, REG_ID:""
+			, REG_TIME:""
+			, SERVICE_ED_TM:""
+			, SERVICE_ST_TM:""
+			, SESSION_TIME:"1"
+			, SITE_OPEN_YN:"Y"
+			, TAB_G:"N"
+			, TAB_SEQ:""
+			, UPT_DATE:""
+			, UPT_ID:""
+			, UPT_TIME:""
+			, VIEW_END_DT:"99991231000000"
+			, VIEW_REG_DT:"20161201000000"
+			, VIEW_YN:"Y"
+	}};
+}; 
+
+
+/**
+ * CN index.jsp에서 메인페이지 이동시 기본메뉴등록
+* Function description...
+* @date 2017. 3. 21.
+* @memberOf 
+* @param {Object} argument
+* @returns {Object} 
+* @author 0069-0321
+* @example
+* @since
+ */
+hpeComm.menu.initMenuInfoCN = function () {
+	top.window._PAGEINFO_LIST = {'300000000000' : {C_SYS_ID:"50"
+			, DEF_MY_MENU_YN:""
+			, DEPTH:"1"
+			, DEPTH1_MENU_SEQ:"50"
+			, DEPTH2_MENU_SEQ:"0"
+			, DEPTH3_MENU_SEQ:"0"
+			, DEPTH4_MENU_SEQ:"0"
+			, DEPTH5_MENU_SEQ:"0"
+			, DEPTH6_MENU_SEQ:"0"
+			, DISPLAY_G:"Y"
+			, ETC_DATA1:""
+			, ETC_DATA2:""
+			, ETC_DATA3:""
+			, ETC_DATA4:""
+			, ETC_DATA5:""
+			, ETC_NUM1:""
+			, ETC_NUM2:""
+			, ETC_NUM3:""
+			, ETC_NUM4:""
+			, ETC_NUM5:""
+			, LOGIN_G:"N"
+			, MENU_AUTH:""
+			, MENU_CODE:"300000000000"
+			, MENU_G:"M"
+			, MENU_NAME:"CN"
+			, MENU_URL:"/hpe/bank_introduce/CN/BI01/BI01000RM00.xml"
+			, MY_MENU_YN:""
+			, NEW_WINDOW_YN:"N"
+			, OPEN_SEQ:"3"
+			, PARENT_MENU_CODE:""
+			, QUICK_MENU_YN:"N"
+			, REG_DATE:""
+			, REG_ID:""
+			, REG_TIME:""
+			, SERVICE_ED_TM:""
+			, SERVICE_ST_TM:""
+			, SESSION_TIME:"1"
+			, SITE_OPEN_YN:"Y"
+			, TAB_G:"N"
+			, TAB_SEQ:""
+			, UPT_DATE:""
+			, UPT_ID:""
+			, UPT_TIME:""
+			, VIEW_END_DT:"99991231000000"
+			, VIEW_REG_DT:"20161201000000"
+			, VIEW_YN:"Y"
+	}};
+};
+
+
+/**
+ * JP index.jsp에서 메인페이지 이동시 기본메뉴등록
+* Function description...
+* @date 2017. 3. 21.
+* @memberOf 
+* @param {Object} argument
+* @returns {Object} 
+* @author 0069-0321
+* @example
+* @since
+ */
+hpeComm.menu.initMenuInfoJP = function () {
+	top.window._PAGEINFO_LIST = {'300000000000' : {C_SYS_ID:"50"
+			, DEF_MY_MENU_YN:""
+			, DEPTH:"1"
+			, DEPTH1_MENU_SEQ:"50"
+			, DEPTH2_MENU_SEQ:"0"
+			, DEPTH3_MENU_SEQ:"0"
+			, DEPTH4_MENU_SEQ:"0"
+			, DEPTH5_MENU_SEQ:"0"
+			, DEPTH6_MENU_SEQ:"0"
+			, DISPLAY_G:"Y"
+			, ETC_DATA1:""
+			, ETC_DATA2:""
+			, ETC_DATA3:""
+			, ETC_DATA4:""
+			, ETC_DATA5:""
+			, ETC_NUM1:""
+			, ETC_NUM2:""
+			, ETC_NUM3:""
+			, ETC_NUM4:""
+			, ETC_NUM5:""
+			, LOGIN_G:"N"
+			, MENU_AUTH:""
+			, MENU_CODE:"300000000000"
+			, MENU_G:"M"
+			, MENU_NAME:"JP"
+			, MENU_URL:"/hpe/bank_introduce/JP/BI01/BI01000RM00.xml"
+			, MY_MENU_YN:""
+			, NEW_WINDOW_YN:"N"
+			, OPEN_SEQ:"3"
+			, PARENT_MENU_CODE:""
+			, QUICK_MENU_YN:"N"
+			, REG_DATE:""
+			, REG_ID:""
+			, REG_TIME:""
+			, SERVICE_ED_TM:""
+			, SERVICE_ST_TM:""
+			, SESSION_TIME:"1"
+			, SITE_OPEN_YN:"Y"
+			, TAB_G:"N"
+			, TAB_SEQ:""
+			, UPT_DATE:""
+			, UPT_ID:""
+			, UPT_TIME:""
+			, VIEW_END_DT:"99991231000000"
+			, VIEW_REG_DT:"20161201000000"
+			, VIEW_YN:"Y"
+	}};
+};
+
+top.window._PAGEINFO_LIST;
+hpeComm.menu.getMenuInfo = function(menuCode) {
+	if ( menuCode == undefined ) return null;
+//	if ( menuCode.length != 10 || menuCode.indexOf("\/") != -1 ) {
+//		return {"MENU_URL" : menuCode};
+//	}
+//	for ( var i=0; i < hpeComm.menu.dl_MenuList.length; i++ ) {
+//		var menu = hpeComm.menu.dl_MenuList[i];
+//		if (menu.MENU_CODE === menuCode) {
+//			return menu;
+//		}
+//	}
+	
+	if(top.window._PAGEINFO_LIST == undefined ) {
+		return null;
+	}
+
+	return top.window._PAGEINFO_LIST[menuCode];
+};
+//hpeComm.menu.getCenterInfo = function() {
+//	var category = '01';
+//	var index = document.location.href.indexOf('#');
+//	if (index > -1) {
+//		var menuCode = document.location.href.substr(index + 1);
+//		// TODO : depth1 코드가 1자리 영문으로 변경됨. 메뉴확정 후 DB연결되면 조건 정리 및 수정필요. 현재는 header파일에 구메뉴코드가 들어있어서 수정하면안됨
+//		if (menuCode !== '' && menuCode !== 'shinhan' && menuCode !== '메인' && menuCode !== '인터넷뱅킹 로그인') {
+//			category = menuCode.substr(2, 2);
+//		}
+//	}
+//	return category;
+//};
+hpeComm.menu.setCurrentMenuInfo = function(menuInfo) {
+	hpeComm.menu.currentMenuInfo = menuInfo;
+};
+hpeComm.menu.getCurrentMenuInfo = function() {
+	return hpeComm.menu.currentMenuInfo;
+};
+
+hpeComm.goPage = function(id, option) {
+
+	hpeComm.log("**************************************");
+	hpeComm.log("goPage id : " + id );
+	hpeComm.log("**************************************");
+	
+	var defaultOption = {
+		spa : true,
+		replaceHistory : false,
+		urlHashText : id
+	};
+	 
+	// 요청한 메뉴정보 추출
+	var menuInfo = hpeComm.menu.getMenuInfo(id);
+	hpeComm.log("**************************************");
+	hpeComm.log("요청한 메뉴정보 추출:"+JSON.stringify(menuInfo));
+	hpeComm.log("**************************************");
+	hpeComm.log("**************************************");
+	hpeComm.log("요청한 메뉴정보 option:"+JSON.stringify(option));
+	hpeComm.log("**************************************");
+	
+	if ( menuInfo == null ) {
+		return;
+	}
+	
+	if ( option && option.param ) {
+		hpeComm.log("**************************************");
+		hpeComm.log("요청한 메뉴정보 option.param:"+JSON.stringify(option.param));
+		hpeComm.log("**************************************");
+		hpeComm.setSaveObject('pageParam', option.param);
+		option.param = null;
+	}
+		
+	hpeComm.menu.setCurrentMenuInfo(menuInfo);
+	hpeComm.log("**************************************");
+	hpeComm.log("menuInfo.MENU_URL = " + menuInfo.MENU_URL);
+	hpeComm.log("2nd param         = " + JSON.stringify($.extend({}, defaultOption, option)));
+	hpeComm.log("**************************************");
+	//alert(menuInfo.LOGIN_G);
+	//alert(!shbComm.session.isLogin());
+	
+	if(menuInfo.LOGIN_G == "Y" &&  !shbComm.session.isLogin()){
+		hpeComm.goPage('400000000001', {param : {"redirectUrl" : id}});
+		defaultOption = {
+			spa : true,
+			replaceHistory : false,
+			urlHashText : '400000000001'
+		};
+		return;
+	}
+	
+	
+	$w.url(menuInfo.MENU_URL, $.extend({}, defaultOption, option));
+	
+};
+
+hpeComm.getPageParam = function() {
+	return hpeComm.getSaveObject('pageParam');
+};
+
+hpeComm.setSaveObject = function(key, value){
+	var valueType = "object";
+	if( typeof value == 'string' ) {
+		valueType ='string';
+	} else if( typeof value == 'object' ) {
+		if( ( typeof value.serialize == 'function' || typeof value.serialize == 'object' ) || ( typeof value.classType != 'undefined' )  ) {
+			value = value.serialize();
+			valueType = "xml";
+		} else {
+			try {
+				var tmp = JSON.stringify(value);
+				value = tmp;
+				valueType = 'json';
+			} catch (e) {
+				valueType = 'object';
+			}
+		}
+	}
+	WebSquare.localStorage.setItem(key, value);
+	WebSquare.localStorage.setItem(key+"__VALUETYPE", valueType);
+};
+
+hpeComm.getSaveObject = function(key, isNotRemove) {
+	var obfuscator_retStr = "";
+	var retType = WebSquare.localStorage.getItem(key+"__VALUETYPE");
+	var tempValue = WebSquare.localStorage.getItem(key);
+	
+	if( typeof obfuscator_retStr == 'undefined' || obfuscator_retStr == null) {
+		return "";
+	}
+	if( typeof retType == 'undefined' || retType == null || typeof tempValue == 'undefined' || tempValue == null) {
+		return obfuscator_retStr;
+	} else {
+		obfuscator_retStr = WebSquare.localStorage.getItem(key).slice(0);
+		retType = WebSquare.localStorage.getItem(key+"__VALUETYPE").slice(0);
+	}
+	var retObj;
+	if( retType.toLowerCase() == 'string' || retType.toLowerCase() == 'number' || retType.toLowerCase() == 'boolean') {
+		retObj = obfuscator_retStr;
+	} else if( retType == 'object' ) {
+		retObj = obfuscator_retStr;
+	} else if( retType == 'json' ) {
+		retObj = JSON.parse(obfuscator_retStr);
+	} else {
+		retObj = eval('new ' + retType + '( obfuscator_retStr )');
+	}
+	if (!isNotRemove) {
+		WebSquare.localStorage.removeItem(key);
+		WebSquare.localStorage.removeItem(key+"__VALUETYPE");
+	}
+
+	return retObj;
+};
+
+
+hpeComm.menuLnk = function(menuCode, menu_id){
+
+	for(var num=0; num < dl_R_MENU_INFO.getRowCount(); num++){
+		if( menuCode == dl_R_MENU_INFO.getCellData( num , "MENU_CODE" ) ){
+			//depth_1.setValue( label )
+			depth_2.setValue( dl_R_MENU_INFO.getCellData( num , "ETC_DATA2" ) );
+			depth_3.setValue( dl_R_MENU_INFO.getCellData( num , "ETC_DATA3" ) );
+			break;
+		}
+	}
+
+	if(menu_id != null){
+		eval(menu_id).addClass("on");
+
+		var number = menuCode.substring(3,4);
+	eval("gnb_menu_"+number).addClass("on");
+	}
+};
+
+
+// 메뉴네비게이션생성 (dl_R_MENU_INFO_VIEW 있어야함)
+hpeComm.menuLnkGen = function(menuCd){
+	var isContinue		= true;
+	var menuCode  = hpeComm.menu.currentMenuInfo.MENU_CODE;
+	if(menuCode == "300000000000"){
+		menuCode = menuCd;	
+	}
+	var currentMenuCode	= menuCode;
+	hpeComm.log("menuCode = "  + menuCode);
+	
+	var menuArray		= [];
+	var sParentsMenuCode = "";
+	while(isContinue) {
+		var menuInfo = hpeComm.menu.getMenuInfo(currentMenuCode);
+		if ( menuInfo == null ) {
+			isContinue	= false;
+			continue;
+		}
+
+		menuArray.push( menuInfo.MENU_NAME );
+		currentMenuCode = menuInfo.PARENT_MENU_CODE;
+		if(sParentsMenuCode == ""){
+			sParentsMenuCode = currentMenuCode; 
+		}
+	}
+	// 메뉴 뒤집기
+	menuArray.reverse();
+	
+	gen_navigation.removeAll();
+	//네비게이션 생성 (최종 전까지)
+	for(var idx=0, lmt=menuArray.length-1; idx<lmt; idx++) {//for
+		var menuName	= menuArray[idx];
+		// 전체건수 = 다음POSITION 
+		var nextIdx	= gen_navigation.getLength();
+		//최초 네비게이션 홈클래스 추가
+		if(nextIdx == 0) {
+			gen_navigation.insert();
+			gen_navigation.getChild(nextIdx, "depth_span").hide('');
+			gen_navigation.getChild(nextIdx, "navigation_name").addClass('iconHome');
+		}else{
+			//메뉴명 네비에 찍음
+			nextIdx	= gen_navigation.getLength();
+			gen_navigation.insert();
+			gen_navigation.getChild(nextIdx, "navigation_name").setValue(menuName);
+		}
+		
+	}//end for
+	///네비 마지막 메뉴경로
+	dl_R_MENU_INFO_VIEW.setCondition( "filter" , "PARENT_MENU_CODE=='"+ sParentsMenuCode +"'" );
+	if(dl_R_MENU_INFO_VIEW.getRowCount() > 0){
+		if(dl_R_MENU_INFO_VIEW.getRowCount() == 1){ //when 1 child
+			var nextIdx	= gen_navigation.getLength();
+			gen_navigation.insert();
+			gen_navigation.getChild(nextIdx, "navigation_name").setValue(menuArray[menuArray.length-1]);
+			gen_navigation.getChild(nextIdx, "grp_navigateLst").destroy();
+		}else{
+			//when 1 < child
+			var nextIdx	= gen_navigation.getLength();
+			gen_navigation.insert();
+			gen_navigation.getChild(nextIdx, "navigation_name").show("none");
+			gen_navigation.getChild(nextIdx, "navigation_name").destroy();
+			gen_navigation.getChild(nextIdx, "grp_navigateLst").show("");
+			gen_navigation.getChild(nextIdx, "currMenuName").setValue(menuArray[menuArray.length-1]);//error
+			
+			var genObj	= gen_navigation.getChild(nextIdx, "gen_navigation2");
+			genObj.removeAll();
+			for(var vIdx=0, vLmt=dl_R_MENU_INFO_VIEW.getRowCount(); vIdx<vLmt ; vIdx++) {
+				var nextItmIdx	= genObj.getLength();
+				genObj.insert(); 
+				var menuCd =  dl_R_MENU_INFO_VIEW.getCellData(vIdx, "MENU_CODE");
+				var menuURL =  dl_R_MENU_INFO_VIEW.getCellData(vIdx, "MENU_URL");
+				var menuNm = dl_R_MENU_INFO_VIEW.getCellData(vIdx, "MENU_NAME");
+				//메뉴코드가 없으면 자식중에 메뉴코드 있는놈 첫번째 가져옴
+				if(strLib.isEmpty(menuURL)){
+					dl_R_MENU_INFO_VIEW2.setCondition( "filter" , "PARENT_MENU_CODE=='"+ menuCd +"'" );
+					if(dl_R_MENU_INFO_VIEW2.getRowCount() > 0){
+						var menuCd2 =  dl_R_MENU_INFO_VIEW2.getCellData(0, "MENU_CODE");
+						var menuURL2 =  dl_R_MENU_INFO_VIEW2.getCellData(0, "MENU_URL");
+						if(!strLib.isEmpty(menuURL2)){ //자식의 첫번째가 경로 있으면 세팅
+							menuCd = menuCd2;
+						}
+					}
+				}
+				hpeComm.log("menuCd = "  + menuCd);
+				var option = {'param'  : { 'menu_code' : menuCd} };
+				hpeComm.log("option = "  + option);
+				genObj.getChild(nextItmIdx, "btn_genMenu").bind( "onclick" , "hpeComm.goPage('"+ menuCd+ "', '" + option + "')");
+				genObj.getChild(nextItmIdx, "btn_genMenu").setValue(menuNm);
+			}
+		}
+	}
+	///네비 마지막 메뉴경로end
+	var menu_id = "";
+	dl_R_MENU_INFO_VIEW.setCondition( "filter" , "MENU_CODE=='"+ menuCode +"'" );
+	if(dl_R_MENU_INFO_VIEW.getRowCount() > 0){
+		menu_id = dl_R_MENU_INFO_VIEW.getCellData(0, "ETC_DATA1");
+	}
+	//상단 메뉴에 on 클랙스 추가
+	if(!strLib.isEmpty(menu_id)){
+		eval(menu_id).addClass("on");
+
+		var number = menuCode.substring(3,4);
+		eval("gnb_menu_"+number).addClass("on");
+	}//end if
+	//페이지 네비게이션 하위리스트 열고 닫는 함수 추가
+	hpeComm.initPath();
+};
+
+hpeComm.initPath = function(){
+	var $selectList = pubApp.$body.find(".selectList");
+	var $selectListCtrl = $selectList.find(">a");
+	var $selectListView = $selectList.find(".list");
+	if($selectList.attr("data-load") === "load") return;
+	$selectList.attr("data-load", "load");
+
+	$selectListCtrl.on("click", function(){
+		if (!$(this).hasClass("on")){
+			$(this).addClass("on");
+			$(this).parent().find(".list").show();
+		} else {
+			$(this).removeClass("on");
+			$(this).parent().find(".list").hide();
+		}
+	});
+
+	pubApp.$body.on("click", function(){
+		if ($selectListCtrl.hasClass("on")){
+			$selectListCtrl.removeClass("on");
+			$selectListView.hide();
+		}
+	});
+
+	/* Back Tab Event */
+	$selectListCtrl.on("keydown", function(event) {
+		if (event.keyCode==9 && event.shiftKey) {
+			$selectListCtrl.removeClass("on");
+			$selectListView.hide();
+		}
+	});
+
+	$("#path .selectList a:last").on("keydown", function(event) {
+		if (event.keyCode==9 && event.shiftKey) {
+		} else if (event.keyCode==9) {
+			$selectListCtrl.removeClass("on");
+			$selectListView.hide();
+		}
+	});	
+};
+
+// 은행소개 BODY 태그에 css추가
+hpeComm.initBodyCssBI = function()  {
+	hpeComm.initBodyCss(['BI'], "은행소개");
+};
+// 은행소개 BODY 태그에 css추가
+hpeComm.initBodyCssBI_CN = function()  {
+	hpeComm.initBodyCss(['BI', 'CN'], "은행소개CN");
+};
+// 은행소개 BODY 태그에 css추가
+hpeComm.initBodyCssBI_JP = function()  {
+	hpeComm.initBodyCss(['BI', 'JP'], "은행소개JP");
+};
+// 은행소개 BODY 태그에 css추가
+hpeComm.initBodyCssBI_EN = function()  {
+	hpeComm.initBodyCss(['BI', 'EN'], "은행소개EN");
+};
+// 프리미어 BODY 태그에 css추가
+hpeComm.initBodyCssPR = function()  {
+	hpeComm.initBodyCss(['PR'], "프리미어");
+};
+// PWM BODY 태그에 css추가
+hpeComm.initBodyCssPWM = function()  {
+	hpeComm.initBodyCss(['PWM'], "PWM");
+};
+// 보스트로 BODY 태그에 css추가
+hpeComm.initBodyCssVOSTRO = function()  {
+	hpeComm.initBodyCss(['bodyVostro'], "보스트로");
+};
+
+// BODY 태그에 css추가
+hpeComm.initBodyCss = function(cssArray, cssDesc)  {
+	try {
+		for(var key in cssArray) {
+			var cssName = cssArray[key];
+			
+			// 없으면 추가
+			var isHasClass = $("body").hasClass(cssName);
+			if(!isHasClass) {
+				$("body").addClass(cssName);
+			}
+		} // end of for
+	}catch(e){}
+	
+	// TODO:결과확인 메세지
+	//alert('TODO : css 초기화완료 TEST -->' + cssDesc);
+};
+
+/**
+hpeComm.menuLnkGen = function(menuCode, menu_id){
+	var isContinue		= true;
+	var currentMenuCode	= menuCode;
+	var menuArray		= [];
+	while(isContinue) {
+		var menuInfo = hpeComm.menu.getMenuInfo(currentMenuCode);
+		if ( menuInfo == null ) {
+			isContinue	= false;
+			continue;
+		}
+		
+		menuArray.push( menuInfo.MENU_NAME );
+		currentMenuCode = menuInfo.PARENT_MENU_CODE;
+	}
+	
+	// 메뉴 뒤집기
+	menuArray.reverse();
+	
+	gen_navigation.removeAll();
+	for(var idx=0, lmt=menuArray.length; idx<lmt; idx++) {
+		var menuName	= menuArray[idx];
+		// 전체건수 = 다음POSITION 
+		var nextIdx	= gen_navigation.getLength();
+		if(nextIdx == 0) {
+			gen_navigation.insert();
+			gen_navigation.getChild(nextIdx, "depth_span").hide('');
+			gen_navigation.getChild(nextIdx, "navigation_name").addClass('iconHome');
+		}
+		
+		nextIdx	= gen_navigation.getLength();
+		gen_navigation.insert();
+		gen_navigation.getChild(nextIdx, "navigation_name").setValue(			menuName);
+	}
+	
+	if(menu_id != null){
+		eval(menu_id).addClass("on");
+
+		var number = menuCode.substring(3,4);
+		eval("gnb_menu_"+number).addClass("on");
+	}
+};
+*/

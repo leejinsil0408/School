@@ -1,0 +1,788 @@
+if (typeof ribComm == "undefined") ribComm = {};
+/**
+* 예금계좌조회 
+* @date 2016.11.08
+* @memberOf 
+* @param {Object} joParam {selectBoxId:"",dataListNm:"",condition:"",multiCondition:"",isValueGuAcc:"",defaultValue:"",callbackFnNm:""}
+* @returns void
+* @author SGO1006814
+* @example
+* var multiCondition = "(230 == $계좌번호구분 || '1' == $인터넷뱅킹출금계좌여부) && '110' == $계좌번호구분";
+* var option = {"selectBoxId":"sbx_accno","dataListNm":"dl_sbx_accno","condition":"","multiCondition":multiCondition,"defaultValue":"110458485960","callbackFnNm":""}; 
+* ribComm.getAccountList(option);
+*  
+* @since
+* 생성되는 dataList 컬럼
+ "당행질권등록여부":"0"
+,"U드림통장여부":"0"
+,"상태":"1"
+,"예금종류":"1"
+,"타기관질권등록여부":"0"
+,"신계좌변환여부":"0"
+,"거래통지기준금액_display":"0"
+,"인터넷신규계좌여부":"0"
+,"입금가능여부":"1"
+,"보안계좌여부":"0"
+,"코어예비필러":""
+,"계좌번호":""
+,"계좌번호_display":""
+,"전자통장여부":"0"
+,"은행코드":"2"
+,"인터넷뱅킹출금계좌여부":"1"
+,"상품코드":"110000101"
+,"SMS통지여부":"0"
+,"꿈을모으는통장여부":"0"
+,"구계좌번호":""
+,"구계좌번호_display":""
+,"종통담보제공여부":"0"
+,"이메일통지여부":"0","실명여부":"1"
+,"과목명":"저축예금"
+,"상품부기명":""
+,"인터넷조회제한여부":"0"
+,"거래통지기준금액":"0"
+,"빗장서비스조회여부":"0"
+,"전자금융예비필러2":""
+,"전자금융예비필러1":""
+,"신규일자":"19890321"
+,"신규일자_display":"1989.03.21"
+,"만기일자":""
+,"만기일자_display":""
+,"관리점번호":"1212"
+,"잔액":"65507189"
+,"잔액_display":"65,507,189"
+,"지불가능액":"65507189"
+,"지불가능액_display":"65,507,189" 
+,"계좌번호구분":계좌번호.substring(0,3)
+ */	
+ribComm.getAccountList = function(joParam) {
+	if( strLib.isEmpty(joParam.selectBoxId) || strLib.isEmpty(joParam.dataListNm) ){ shbComm.alert(shbComm.lang["CO01102"]); return; }
+	var param = {"getSession":{"sessionList":"system:예금계좌;"}};
+	var option = {};
+	option.serviceType = "SG";
+	option.serviceCode = "D0011";
+	option.permitMultiTransaction = "true";
+	option.callback = function(jReturn){
+		ribComm.callbackAccountList(jReturn, joParam);
+	};
+	shbComm.executeAjax("", param, option);
+};
+/**
+* 예금계좌조회 콜백
+* @date 2016.11.08
+* @memberOf 
+* @param {Object} jReturn
+* @returns {Object} joParam
+* @author SGO1006814
+* @example
+* @since
+*/
+ribComm.callbackAccountList = function(jReturn, joParam){
+	try{
+		if( "S" != jReturn.root_info.resultStatus ) {
+			shbComm.alert(shbComm.lang["CO01103"]);
+			return;
+		}
+		var oSelectBox = WebSquare.util.getComponentById(joParam.selectBoxId);
+		var oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+		var sDefaultValue = joParam.defaultValue;
+		var iSelectedIndex = 0;
+		var arrCondKey = [];
+		var arrCondVal = [];
+		var fnCondition = null;
+		if( !strLib.isEmpty(joParam.condition) ) {
+			var arrTemp = joParam.condition.split(";");
+			if( jsonLib.isArray(arrTemp) ) {
+				for ( var i = 0; i < arrTemp.length; i++) {
+					var arrTemp2 = arrTemp[i].split(":");
+					arrCondKey.push(arrTemp2[0]);
+					arrCondVal.push(arrTemp2[1]);
+				}
+			} else {
+				var arrTemp2 = arrTemp.split(":");
+				arrCondKey.push(arrTemp2[0]);
+				arrCondVal.push(arrTemp2[1]);
+			}
+		}
+		if( !strLib.isEmpty(joParam.multiCondition) ) {
+			fnCondition = function(row) {
+				var sFullCond = strLib.replaceAll(joParam.multiCondition, "$", "row.");
+				return eval(sFullCond);
+			};
+		}
+
+		var arrAccNoList = jReturn["예금계좌"];
+		if( jsonLib.isNullObj(arrAccNoList) || arrAccNoList.length == 0 ) {
+			arrAccNoList = jReturn["R_RIBD0011_1"];
+		}
+		if( jsonLib.isNullObj(arrAccNoList) ) arrAccNoList = [];
+
+		var arrApplyAccNo = []; //selectbox에 적용할 계좌번호
+		for ( var i = 0; i < arrAccNoList.length; i++) {
+			var accItem = arrAccNoList[i];
+			accItem["계좌번호구분"] = accItem["계좌번호"].substring(0,3);
+			if(jsonLib.isNullObj(oDataList) && !strLib.isEmpty(joParam.dataListNm) && i == 0){
+				if( jsonLib.isNullObj(shbComm.getComponent(joParam.dataListNm)) ) { 
+					var options = {"id":joParam.dataListNm,"type":"dataList","option":{"baseNode":"list", "saveRemovedData":"false","repeatNode":"map"},"columnInfo":[]};
+					for ( var item in arrAccNoList[0]) {
+						options.columnInfo.push({"id":item,"name":item,"dataType":"text"});
+					}
+					options.columnInfo.push({"id":"label","name":"label","dataType":"text"});
+					options.columnInfo.push({"id":"value","name":"value","dataType":"text"});
+					$w.data.create(options);
+					oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+				}
+			}
+			var bAddItem = true;
+			for ( var c = 0; c < arrCondKey.length; c++) {
+				if( accItem[arrCondKey[c]] != arrCondVal[c] ) {
+					bAddItem = false;
+					break;
+				}
+			}
+
+			if( bAddItem && !jsonLib.isNullObj(fnCondition) ) {
+				bAddItem = fnCondition.call(this, accItem);
+			}
+			if( !bAddItem ) { continue; }
+			if( "1" == accItem["신계좌변환여부"] ) {
+				accItem.value = accItem["계좌번호"];
+				accItem.label = accItem["계좌번호_display"];
+			} else {
+				if( !strLib.isEmpty(joParam.isValueGuAcc) && "1" == joParam.isValueGuAcc ){
+					accItem.value = accItem["구계좌번호"];
+				} else {
+					accItem.value = accItem["계좌번호"];
+				}
+				accItem.label = accItem["구계좌번호_display"];
+			}
+			var accNm = "";
+			if( !strLib.isEmpty(accItem["상품부기명"]) ) {
+				accNm = accItem["상품부기명"];
+			} else {
+				accNm = accItem["과목명"];
+			}
+			if( strLib.getByteLen(accNm) > 24 ) {
+				accNm = strLib.getByteStr(accNm,24)+"…";
+			}
+			accItem.label = accItem.label + ( strLib.isEmpty(accNm) ? "" : " ["+accNm+"]");
+			if( !strLib.isEmpty(sDefaultValue) && sDefaultValue == accItem.value) {
+				iSelectedIndex = arrApplyAccNo.length;
+				if( oSelectBox.options["chooseOption"] ) iSelectedIndex++;
+			}
+			arrApplyAccNo.push(accItem);
+		}
+		if( arrApplyAccNo.length > 0 ){
+			oDataList.setJSON(arrApplyAccNo);
+		} else {
+			arrApplyAccNo.push({"value":"","label":shbComm.lang["CO01106"]});
+			if( jsonLib.isNullObj(shbComm.getComponent(joParam.dataListNm)) ) {
+				var options = {"id":joParam.dataListNm,"type":"dataList","option":{"baseNode":"list", "saveRemovedData":"false","repeatNode":"map"},"columnInfo":[]};
+				options.columnInfo.push({"id":"label","name":"label","dataType":"text"});
+				options.columnInfo.push({"id":"value","name":"value","dataType":"text"});
+				$w.data.create(options);
+				oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+			}
+			oDataList.setJSON(arrApplyAccNo);
+		}
+		oSelectBox.setNodeSet("data:"+joParam.dataListNm,"label","value");
+		oSelectBox.refresh();
+		oSelectBox.setSelectedIndex(iSelectedIndex);
+		
+		if( etcLib.isFunction(joParam.callbackFnNm) ){
+			etcLib.getFunction(joParam.callbackFnNm).call(this);
+		};
+	} catch(e) {
+		shbComm.printStackTrace(e);
+	}
+};
+/*
+계좌구분
+계좌번호
+구계좌번호
+과목명
+신규일자
+만기일자
+잔액부호
+잔액
+예금종류
+신계좌변환여부
+관리점번호
+상품부기명
+상태
+실명여부
+생계형여부
+세금우대여부
+입금가능여부
+인터넷신규계좌여부
+전자통장여부
+인터넷뱅킹출금계좌여부
+cmoney계좌여부
+인터넷조회제한여부
+빗장서비스조회여부
+질권여부
+담보여부
+해지일자
+해지점
+보안계좌여부
+은행구분
+통화코드
+환율
+외화잔액
+추가적립가능여부
+회차
+상품코드
+옵셋여부
+닉네임
+평가금액
+선물환포함평가금액
+*/
+ribComm.getForeignAccountList = function(joParam) {
+	if( strLib.isEmpty(joParam.selectBoxId) || strLib.isEmpty(joParam.dataListNm) ){ shbComm.alert(shbComm.lang["CO01102"]); return; }
+	var param = {"getSession":{"sessionList":"system:외화계좌;"}};
+	var option = {};
+	option.serviceType = "SG";
+	option.serviceCode = "F0010";
+	option.permitMultiTransaction = "true";
+	option.callback = function(jReturn){
+		ribComm.callbackForeignAccountList(jReturn, joParam);
+	};
+	shbComm.executeAjax("", param, option);
+};
+/**
+* 외화계좌조회 콜백
+* @date 2016.11.08
+* @memberOf 
+* @param {Object} jReturn
+* @returns {Object} joParam
+* @author SGO1006814
+* @example
+* @since
+* 2016.11.29 계좌번호만으로 구별이 안됨 계좌번호|통화코드 로 value 변경
+*/
+ribComm.callbackForeignAccountList = function(jReturn, joParam){
+	try{
+		if( "S" != jReturn.root_info.resultStatus ) {
+			shbComm.alert(shbComm.lang["CO01104"]);
+			return;
+		}
+		var oSelectBox = WebSquare.util.getComponentById(joParam.selectBoxId);
+		var oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+		var sDefaultValue = joParam.defaultValue;
+		var iSelectedIndex = 0;
+		var arrCondKey = [];
+		var arrCondVal = [];
+		var fnCondition = null;
+		if( !strLib.isEmpty(joParam.condition) ) {
+			var arrTemp = joParam.condition.split(";");
+			if( jsonLib.isArray(arrTemp) ) {
+				for ( var i = 0; i < arrTemp.length; i++) {
+					var arrTemp2 = arrTemp[i].split(":");
+					arrCondKey.push(arrTemp2[0]);
+					arrCondVal.push(arrTemp2[1]);
+				}
+			} else {
+				var arrTemp2 = arrTemp.split(":");
+				arrCondKey.push(arrTemp2[0]);
+				arrCondVal.push(arrTemp2[1]);
+			}
+		}
+		if( !strLib.isEmpty(joParam.multiCondition) ) {
+			fnCondition = function(row) {
+				var sFullCond = strLib.replaceAll(joParam.multiCondition, "$", "row.");
+				return eval(sFullCond);
+			};
+		}
+
+		var arrAccNoList = jReturn["외화계좌"];
+		if( jsonLib.isNullObj(arrAccNoList) || arrAccNoList.length == 0 ) {
+			arrAccNoList = jReturn["R_RIBF0010_1"];
+		}
+		if( jsonLib.isNullObj(arrAccNoList) ) arrAccNoList = [];
+
+		var arrApplyAccNo = []; //selectbox에 적용할 계좌번호
+		for ( var i = 0; i < arrAccNoList.length; i++) {
+			var accItem = arrAccNoList[i];
+			accItem["계좌번호구분"] = accItem["계좌번호"].substring(0,3);
+			if(jsonLib.isNullObj(oDataList) && !strLib.isEmpty(joParam.dataListNm) && i == 0){
+				if( jsonLib.isNullObj(shbComm.getComponent(joParam.dataListNm)) ) { 
+					var options = {"id":joParam.dataListNm,"type":"dataList","option":{"baseNode":"list", "saveRemovedData":"false","repeatNode":"map"},"columnInfo":[]};
+					for ( var item in arrAccNoList[0]) {
+						options.columnInfo.push({"id":item,"name":item,"dataType":"text"});
+					}
+					options.columnInfo.push({"id":"label","name":"label","dataType":"text"});
+					options.columnInfo.push({"id":"value","name":"value","dataType":"text"});
+					$w.data.create(options);
+					oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+				}
+			}
+			var bAddItem = true;
+			for ( var c = 0; c < arrCondKey.length; c++) {
+				if( accItem[arrCondKey[c]] != arrCondVal[c] ) {
+					bAddItem = false;
+					break;
+				}
+			}
+
+			if( bAddItem && !jsonLib.isNullObj(fnCondition) ) {
+				bAddItem = fnCondition.call(this, accItem);
+			}
+			if( !bAddItem ) { continue; }
+			if( "1" == accItem["신계좌변환여부"] ) {
+				accItem.value = accItem["계좌번호"]+"|"+accItem["통화코드"]+"|"+accItem["회차"];
+				accItem.label = accItem["계좌번호_display"];
+			} else {
+				if( !strLib.isEmpty(joParam.isValueGuAcc) && "1" == joParam.isValueGuAcc ){
+					accItem.value = accItem["구계좌번호"]+"|"+accItem["통화코드"]+"|"+accItem["회차"];
+				} else {
+					accItem.value = accItem["계좌번호"]+"|"+accItem["통화코드"]+"|"+accItem["회차"];
+				}
+				accItem.label = accItem["구계좌번호_display"];
+			}
+			var accNm = "";
+			if( !strLib.isEmpty(accItem["상품부기명"]) ) {
+				accNm = accItem["상품부기명"];
+			} else {
+				accNm = accItem["과목명"];
+			}
+			if( strLib.getByteLen(accNm) > 24 ) {
+				accNm = strLib.getByteStr(accNm,24)+"…";
+			}
+			accItem.label = accItem.label + (strLib.isEmpty(accItem["통화코드"]) ? "" : " ("+accItem["통화코드"]+") ") + ( strLib.isEmpty(accNm) ? "" : " ["+accNm+"]");
+			if( !strLib.isEmpty(sDefaultValue) && sDefaultValue == accItem["계좌번호"]) {
+				iSelectedIndex = arrApplyAccNo.length;
+				if( oSelectBox.options["chooseOption"] ) iSelectedIndex++;
+			}
+			arrApplyAccNo.push(accItem);
+		}
+		if( arrApplyAccNo.length > 0 ){
+			oDataList.setJSON(arrApplyAccNo);
+		} else {
+			arrApplyAccNo.push({"value":"","label":shbComm.lang["CO01106"]});
+			if( jsonLib.isNullObj(shbComm.getComponent(joParam.dataListNm)) ) {
+				var options = {"id":joParam.dataListNm,"type":"dataList","option":{"baseNode":"list", "saveRemovedData":"false","repeatNode":"map"},"columnInfo":[]};
+				options.columnInfo.push({"id":"label","name":"label","dataType":"text"});
+				options.columnInfo.push({"id":"value","name":"value","dataType":"text"});
+				$w.data.create(options);
+				oDataList = WebSquare.util.getComponentById(joParam.dataListNm);
+			}
+			oDataList.setJSON(arrApplyAccNo);
+		}
+		oSelectBox.setNodeSet("data:"+joParam.dataListNm,"label","value");
+		oSelectBox.refresh();
+		oSelectBox.setSelectedIndex(iSelectedIndex);
+		
+		if( etcLib.isFunction(joParam.callbackFnNm) ){
+			etcLib.getFunction(joParam.callbackFnNm).call(this);
+		};
+	} catch(e) {
+		shbComm.printStackTrace(e);
+	}
+};
+//출금가능금액 조회 콜백파라미터:R_RIBD2004 json object
+ribComm.getChulGeumPossibleAmt = function(accno, bankGubun, callbackFnNm) {
+	if( strLib.isEmpty(accno) ) { shbComm.alert(shbComm.lang["CO01105"]); return; }
+	if( strLib.isEmpty(bankGubun) ) { return; }
+	var param = {"S_RIBD2004":{"출금계좌번호":accno,"출금은행구분":bankGubun}};
+	var option = {};
+	option.serviceType = "MG";
+	option.serviceCode = "D2004";
+	option.callback = function(jReturn){
+		if( "S" != jReturn.root_info.resultStatus ) {
+			shbComm.viewWarningMsg(jReturn.root_info);
+			return;
+		}
+		if( etcLib.isFunction(callbackFnNm) ){
+			etcLib.getFunction(callbackFnNm)(jReturn.R_RIBD2004);
+		};
+	};
+	shbComm.executeAjax("", param, option);
+};
+//외화 출금가능금액 조회 콜백 파라미터:R_RIBF1415_1 통화가 같은 Row json object
+ribComm.getForeignChulGeumPossibleAmt = function(accno, bankGubun, curCd, callbackFnNm) {
+	if( strLib.isEmpty(accno) ) { shbComm.alert(shbComm.lang["CO01105"]); return; }
+	if( strLib.isEmpty(bankGubun) ) { return; }
+	var param = {"S_RIBF1415":{"계좌번호":accno,"은행구분":bankGubun}};
+	var option = {};
+	option.serviceType = "MG";
+	option.serviceCode = "F1415";
+	option.callback = function(jReturn){
+		if( "S" != jReturn.root_info.resultStatus ) {
+			shbComm.viewWarningMsg(jReturn.root_info);
+			return;
+		}
+		var joResult = null;
+		var arrResult = jReturn.R_RIBF1415_1;
+		for ( var i = 0; i < arrResult.length; i++) {
+			if( curCd == arrResult[i]["통화"] ) {
+				joResult = arrResult[i];
+				break;
+			} 
+		}
+		if( etcLib.isFunction(callbackFnNm) ){
+			etcLib.getFunction(callbackFnNm)(joResult);
+		};
+	};
+	shbComm.executeAjax("", param, option);
+};
+//은행구분 명칭 리턴
+ribComm.getBankGubunNm = function(valBankGubun){
+	var sBankGubunNm = ""; 
+	if( strLib.isEmpty(valBankGubun) ){ return sBankGubunNm; }
+	if( "1" == valBankGubun ){
+		sBankGubunNm = "[신한]";
+	} else if( "2" == valBankGubun ){
+		sBankGubunNm = "[구 조흥]";
+	} else if( "3" == valBankGubun ){
+		sBankGubunNm = "[구 신한]";
+	} else if( "4" == valBankGubun ){
+		sBankGubunNm = "[구 충북]";
+	} else if( "5" == valBankGubun ){
+		sBankGubunNm = "[구 강원]";
+	} else if( "6" == valBankGubun ){
+		sBankGubunNm = "[구 동화]";
+	} else if( "7" == valBankGubun ){
+		sBankGubunNm = "[현대종금]";
+	}
+	return sBankGubunNm;
+};
+//컴포넌트내 Tag제거 objId - 컴포넌트ID type - 제거구분(memo : 개행tag제거) 그외(전체tag제거) 이체성 br 입력막기 
+ribComm.fncRemoveTagString = function(objId, type) {
+	var obj = WebSquare.util.getComponentById(objId);
+	
+	if(typeof obj == "undefined" || obj == null || obj == "") {
+		return;
+	}
+
+	var regExp = "";
+
+	if(type == "memo"){
+		regExp = /[[<](\/?)br[ ]*(\/?)[>]|[<](\/?)p[ ]*(\/?)[>]]*/gi;
+	} else {
+		regExp = /[<][^>]*[>]/gi;
+	}
+
+	var value = obj.getValue();
+
+	if(value != "") {
+		obj.setValue(value.replace(regExp, ""));
+	}
+};
+// ********** 오늘본상품/관심상품/비교함 S **********
+//쿠키 세팅 
+ribComm.setCookie = function(name, value, expiredays, domains) {
+	var todayDate = new Date();
+	todayDate.setDate(todayDate.getDate() + expiredays);
+	var pDomain;
+	if(typeof domains != 'undefined') pDomain = 'domain='+domains+';';
+	else pDomain = '';
+	document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"+pDomain;
+};
+//쿠키 값 조회 
+ribComm.getCookie = function(name) {
+	var nameOfCookie = name + "=";
+	var x = 0;
+	k = 0;
+	while (x <= document.cookie.length) {
+		var y = (x + nameOfCookie.length);
+		if (document.cookie.substring(x, y) == nameOfCookie) {
+			if ((endOfCookie = document.cookie.indexOf(";", y)) == -1) endOfCookie = document.cookie.length;
+			return unescape(document.cookie.substring(y, endOfCookie));
+		}
+		x = document.cookie.indexOf(" ", x) + 1;
+		if (x == 0) break;
+	}
+	return "";
+};
+
+//오늘본상품 VIEW_TODAY_PRODUCT
+ribComm.VTP_SAVE_ID = "TODAY_PRODUCT_RIB2017";
+ribComm.CMP_SAVE_ID = "COMPARE_PRODUCT_RIB2017";
+ribComm.DELIM_PRODUCT = "|"; //상품구분
+ribComm.DELIM_FIELD = ";"; //필드구분
+ribComm.UNFOLD_PRODUCT_LAYER = "N";
+ribComm.DIV_PRODUCT_INFO = {
+	 "arrPgb":["1","2","3","4","5","6"]
+	,"arrPgm":["예금/신탁","외환","골드/실버","보험","대출","펀드"]
+	,"arrPgbIconClass":["icoBoxTyDeposit","icoBoxTyForeign","icoBoxTyGold","icoBoxTyBanca","icoBoxTyLoan","icoBoxTyFund"]
+	,"arrMenuCenter":["01","05","07","08","03","04"]//개인:1 자산관리:3 예금/신탁:01 ISA:02 대출:03 펀드:04 외환:05 퇴직연금:06 골드/실버:07 보험:08 미션플러스:09
+	,"arrMcd":["020102010110","020504030200","020703010600","020802170000","020308090000","020406010300"]
+	,"findPgbIndex":function(pgb){
+		for ( var i = 0; i < this.arrPgb.length; i++) {
+			if( pgb == this.arrPgb[i] ){
+				return i;
+				break;
+			}
+		}
+		return -1;
+	}
+	,"getPgm":function(pgb){
+		var idx = this.findPgbIndex(pgb);
+		if( idx >= 0 ) { 
+			return this.arrPgm[idx]; 
+		} else {
+			return "";
+		}
+	}
+	,"getMcd":function(pgb){
+		var idx = this.findPgbIndex(pgb);
+		if( idx >= 0 ) { 
+			return this.arrMcd[idx]; 
+		} else {
+			return "";
+		}
+	}
+	,"getIconClass":function(pgb){
+		var idx = this.findPgbIndex(pgb);
+		if( idx >= 0 ) { 
+			return this.arrPgbIconClass[idx];
+		} else {
+			return "";
+		}
+	}
+	,"getMccToPgb":function(mcc){
+		var idx = -1;
+		for ( var i = 0; i < this.arrMenuCenter.length; i++) {
+			if( mcc == this.arrMenuCenter[i] ){
+				idx = i;
+				break;
+			}
+		}
+		if( idx >= 0 ) {
+			return this.arrPgb[idx];
+		} else {
+			return "";
+		}
+	}
+};
+//오늘본상품 추가
+//상품구분pgb;상품코드pcd;상품명pnm;메뉴코드pgb;파라미터prm
+//urlencoding된 문자열 4kb 까지, 상품명 한글30자 + ".."
+ribComm.addViewTodayProduct = function(option){
+	try {
+		if( jsonLib.isNullObj(option) ||
+			strLib.isEmpty(option.pgb) ||
+			strLib.isEmpty(option.pcd) ||
+			strLib.isEmpty(option.pnm) ||
+			strLib.isEmpty(option.mcd) ) {
+			shbComm.printStackTrace("ribComm.addViewTodayProduct 필수 파라미터 없음");
+			return; 
+		}
+		var sData = ribComm.getCookie(ribComm.VTP_SAVE_ID);
+		var arrProd = [];
+		if( !strLib.isEmpty(sData) ) {
+			arrProd = sData.split(ribComm.DELIM_PRODUCT);
+		}
+		for ( var i = 0; i < arrProd.length; i++) {//중복체크
+			var arrField = arrProd[i].split(ribComm.DELIM_FIELD);
+			if( option.pcd == arrField[1] ) {
+				return;
+			}
+		}
+		var delim = ribComm.DELIM_FIELD;
+		var sProdNm = option.pnm.substring(0, 30) + (option.pnm.length > 30 ? ".." : "");
+		//상품구분;상품코드;상품명;메뉴코드;파라미터
+		var sSaveStr = option.pgb+delim+option.pcd+delim+sProdNm+delim+option.mcd+delim+option.prm;
+		arrProd.push(sSaveStr);
+		
+		var iLoop = 0;
+		var isOverAlert = false;
+		while( iLoop < 5 ) {
+			if( encodeURIComponent(arrProd.join(ribComm.DELIM_PRODUCT)).length > 4096 ) {//4kb
+				isOverAlert = true;
+				arrProd.splice(0,1);
+			} else {
+				break;
+			}
+			iLoop++;
+		}
+		ribComm.setCookie(ribComm.VTP_SAVE_ID, arrProd.join(ribComm.DELIM_PRODUCT), 1, "shinhan.com");
+		ribComm.refreshViewTodayProduct();
+		if( isOverAlert ){
+			shbComm.alert("오늘 본 상품이 너무 많습니다.<br/>처음 본 상품을 지우고 오늘 본 상품에 추가합니다.");
+			return;
+		}
+	} catch(e) {
+		shbComm.printStackTrace("ribComm.addViewTodayProduct Exception::"+e);
+	}
+};
+//비교함 추가
+//상품구분pgb;상품코드pcd;
+//urlencoding된 문자열 4kb 까지, 상품명 한글30자 + ".."
+ribComm.addCompareProduct = function(option){
+	try {
+		if( jsonLib.isNullObj(option) ||
+			strLib.isEmpty(option.pgb) ||
+			strLib.isEmpty(option.pcd) ) {
+			shbComm.printStackTrace("ribComm.addCompareProduct 필수 파라미터 없음"); 
+			return; 
+		}
+		var sData = ribComm.getCookie(ribComm.CMP_SAVE_ID);
+		var arrProd = [];
+		if( !strLib.isEmpty(sData) ) {
+			arrProd = sData.split(ribComm.DELIM_PRODUCT);
+		}
+		var equalPgbCnt = 0;
+		for ( var i = 0; i < arrProd.length; i++) {//중복체크
+			var arrField = arrProd[i].split(ribComm.DELIM_FIELD);
+			if( option.pcd == arrField[1] ) {
+				shbComm.alert("이미 비교함에 등록하셨습니다.");
+				return;
+			}
+			if( option.pgb == arrField[0] ) {
+				equalPgbCnt++;
+			}
+		}
+		if( equalPgbCnt > 2 ) {
+			var msg = "상품비교는 최대 3개까지 가능합니다.<br/>상품비교함에서 상품을 삭제하신 후 이용하세요.";
+			shbComm.confirm(msg, function(){ ribComm.openCompareProductPopup(option.pgb); });
+			return;
+		}
+		var delim = ribComm.DELIM_FIELD;
+		//상품구분;상품코드;
+		var sSaveStr = option.pgb+delim+option.pcd;
+		arrProd.push(sSaveStr);
+		ribComm.setCookie(ribComm.CMP_SAVE_ID, arrProd.join(ribComm.DELIM_PRODUCT), 1, "shinhan.com");
+		ribComm.openCompareProductPopup(option.pgb);
+	} catch(e) {
+		shbComm.printStackTrace("ribComm.addViewTodayProduct Exception::"+e);
+	}
+};
+//상품비교함 삭제
+ribComm.delCompareProduct = function(pcd, callbackFnNm) {
+	try {
+		var sData = ribComm.getCookie(ribComm.CMP_SAVE_ID);
+		var arrProd = [];
+		if( !strLib.isEmpty(sData) ) {
+			arrProd = sData.split(ribComm.DELIM_PRODUCT);
+		}
+		for ( var i = 0; i < arrProd.length; i++) {//중복체크
+			var arrField = arrProd[i].split(ribComm.DELIM_FIELD);
+			if( pcd == arrField[1] ) {
+				arrProd.splice(i,1);
+				break;
+			}
+		}
+		ribComm.setCookie(ribComm.CMP_SAVE_ID, arrProd.join(ribComm.DELIM_PRODUCT), 1, "shinhan.com");
+		if( etcLib.isFunction(callbackFnNm) ){
+			etcLib.getFunction(callbackFnNm).call(this);
+		}
+	} catch(e) {
+		shbComm.printStackTrace("ribComm.delCompareProduct Exception::"+e);
+	}	
+};
+//비교함상품 추출 상품구분별
+ribComm.getCompareProduct = function(pgb) {
+	try {
+		var arrReturn = [];
+		if( strLib.isEmpty(pgb) ) { return arrReturn; }
+		var sData = ribComm.getCookie(ribComm.CMP_SAVE_ID);
+		var arrProd = [];
+		if( !strLib.isEmpty(sData) ) {
+			arrProd = sData.split(ribComm.DELIM_PRODUCT);
+		}
+		for ( var i = 0; i < arrProd.length; i++) {
+			var arrField = arrProd[i].split(ribComm.DELIM_FIELD);
+			if( pgb == arrField[0] ) {
+				arrReturn.push({"pgb":arrField[0],"pcd":arrField[1],"pnm":arrField[2],"mcd":arrField[3],"prm":arrField[5]});
+			}
+		}
+		return arrReturn;
+	} catch(e) {
+		shbComm.printStackTrace("ribComm.getCompareProduct Exception::"+e);
+	}
+};
+//관심상품 추가
+ribComm.addInterestProduct = function(option){
+	try {
+		if( !shbComm.session.isLogin() ) {
+			shbComm.alert("로그인 후 관심 상품 등록이 가능합니다.");
+			return;
+		}
+		if( jsonLib.isNullObj(option) ||
+			strLib.isEmpty(option.pcd) ) {
+			shbComm.printStackTrace("ribComm.addInterestProduct 필수 파라미터 없음"); 
+			return; 
+		}
+		//var sUrl = "cr="+option.mcd+(strLib.isEmpty(option.prm) ? "" : "&"+option.prm);
+		var param = {"HPE_PRODUCT":{"C_JUMIN_NO":"","C_JUMIN_NO_getSession":"system:RRNO_CID","C_PROD_ID":option.pcd,"C_URL":""}};
+		var option = {
+			 "serviceType":"TS"
+			,"serviceCode":"TCO1031"
+			,"callback":"ribComm.callbackAddInterestProduct"
+		};
+		shbComm.executeAjax("", param, option);
+	} catch(e) {
+		shbComm.printStackTrace("ribComm.addInterestProduct Exception::"+e);
+	}
+};
+//관심상품추가 콜백
+ribComm.callbackAddInterestProduct = function(result){
+	if( "S" != result.root_info.resultStatus) {
+		shbComm.viewWarningMsg(result.root_info);
+		return;
+	} else {
+		if( !jsonLib.isNullObj(result.MY_PROD) && !strLib.isEmpty(result.MY_PROD.msg) ) {
+			shbComm.alert(result.MY_PROD.msg);
+			return;
+		} else {
+			ribComm.refreshInterestProduct();
+			shbComm.alert("관심 상품으로 등록되었습니다.");
+			return;
+		}
+	}
+};
+//상품상세화면으로 이동 option {pgb:"","mcd":"11111111","pcd":"1111111","prm":"param1=value1&param2=value2"}
+ribComm.moveProductDetail = function(option) {
+	if( jsonLib.isNullObj(option) || strLib.isEmpty(option.pcd) ) return;
+	var oOpt = {"pcd":option.pcd};
+	if( !strLib.isEmpty(option.mcd) ) { 
+		if( !strLib.isEmpty(option.prm) ) {
+			var arrParam = option.prm.split("&");
+			for( var i = 0; i < arrParam.length; i++ ){
+				var arrTmp = arrParam[i].split("=");
+				oOpt[arrTmp[0]] = arrTmp[1];
+			}
+		}
+		shbComm.goPage(option.mcd, {"param":oOpt});
+	} else {
+		if( strLib.isEmpty(option.pgb) ) { return; }
+		shbComm.goProductDetail(option.pgb, option.pcd);
+	}
+};
+//상품비교함 팝업 열기 
+ribComm.openCompareProductPopup = function(productGubun){
+	var pgb = ( !strLib.isEmpty(productGubun) ? productGubun : "");
+	var cc = top.shbComm.menu.getCurrentCenterInfo();//관심상품팝업화면에서도 사용하므로 top으로 처리함
+	if( strLib.isEmpty(pgb) ) { 
+		if( !strLib.isEmpty(cc) ) {
+			pgb = ribComm.DIV_PRODUCT_INFO.getMccToPgb(cc);
+		} else {
+			pgb = ribComm.DIV_PRODUCT_INFO.arrPgb[0];
+		}
+	}
+	var option = {
+		 "title":"상품비교함"
+		,"w2xPath":"/rib/center/SC00/SC00020RP10.xml"
+		,"width":"912"
+		,"height":"656"
+		,"callback":"ribComm.moveProductDetail"
+		,"dataObject":{"pgb":pgb} };
+	shbComm.openPopup(option);
+};
+//오늘본상품 재구성
+ribComm.refreshViewTodayProduct = function(){
+	if( etcLib.isFunction("footerObj.product.fncSetViewTodayProduct") ) {
+		footerObj.product.fncSetViewTodayProduct();
+	} else {
+		if( parent ) parent.ribComm.refreshViewTodayProduct();
+	}
+};
+//관심상품 재구성
+ribComm.refreshInterestProduct = function(){
+	if( etcLib.isFunction("footerObj.product.fncInquaryTCO1030") ) {
+		footerObj.product.fncInquaryTCO1030();
+	} else {
+		if( parent ) parent.ribComm.refreshInterestProduct();
+	}
+};
+//********** 오늘본상품/관심상품/비교함 E **********

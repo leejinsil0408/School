@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>신한은행 회원가입창</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            display: flex;
+            justify-content: space-around;
+            color: black;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #menu1 a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        ul {
+            padding: 5px;
+            margin: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        li {
+            display: inline-block;
+            list-style: none;
+        }
+
+        #menu1 {
+            background: rgb(45, 113, 196);
+        }
+
+        #menu1 ul {
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        #menu1 ul li {
+            float: left;
+            width: 15%;
+            height: 50%;
+            line-height: 25px;
+            color: white;
+        }
+
+        #menu1 ul li a {
+            display: block;
+        }
+
+        #menu1 ul li a:hover {
+            background: #ffffff;
+            color: rgb(45, 113, 196);
+        }
+
+        #menu2 {
+            display: flex;
+            background: rgb(25, 93, 174);
+            color: #c2c2c2;
+            padding: 5px;
+            padding-left: 80px;
+        }
+
+        span {
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        #txt_title {
+            margin-left: 80px;
+            margin-right: 50px;
+            display: flex;
+            font-size: 30px;
+            justify-content: space-between;
+        }
+
+        ul>li {
+            margin-left: 10px;
+        }
+
+        main {}
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .content_row {
+            display: flex;
+            flex-wrap: nowrap;
+            /* flex-direction: row; */
+            justify-content: space-between;
+            width: 100%;
+            height: 200px;
+        }
+
+
+
+        .content .item {
+            margin: 1em;
+            height: 50px;
+            flex-grow: 1;
+        }
+
+        .content .item:nth-last-child(1) {
+            margin-bottom: 0;
+        }
+
+        .content .item:nth-child(1) {
+            width: 100%
+        }
+
+        .content .item:nth-child(2) {
+            width: 100%
+        }
+
+        .content .item:nth-child(3) {
+            width: 25%
+        }
+
+        .content .item:nth-child(4) {
+            width: 25%
+        }
+
+        .content .item:nth-child(5) {
+            width: 25%
+        }
+
+        .content .item:nth-child(6) {
+            width: 100%
+        }
+
+        .item1 {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 1px;
+            background-color: rgba(30, 144, 255, 0.2);
+            height: 100%;
+            width: 100%;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding: 40px;
+        }
+
+        .text-sinhan {
+            font-size: 20px;
+            display: flex;
+        }
+
+        .text-sinhan2 {
+            font-size: 14px;
+            display: flex;
+
+        }
+
+        .text-a {
+            margin-left: 80px;
+        }
+
+        .item2 {
+            border-style: solid;
+            border-color: rgb(238, 238, 238);
+            border-width: 1px;
+            background-color: none;
+            height: 100%;
+            width: 100%;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 10px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .item3 {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 1px;
+            height: 100%;
+            width: 100%;
+            padding: 55px;
+            margin-top: 20px;
+            margin: 30px;
+            font-size: 15px;
+        }
+
+        .item4 {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 1px;
+            height: 100%;
+            width: 100%;
+            padding: 55px;
+            margin-top: 20px;
+            margin: 30px;
+            font-size: 15px;
+        }
+
+        .item5 {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 1px;
+            height: 100%;
+            width: 100%;
+            padding: 55px;
+            margin-top: 20px;
+            margin: 30px;
+            font-size: 15px;
+        }
+
+        .item6 {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 1px;
+            height: 100%;
+            width: 100%;
+            margin: 200px;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding: 50px;
+            font-size: 14px;
+        }
+
+        .item2.text-b {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .text-c {
+            color: rgb(45, 113, 196);
+            font-size: 18px;
+        }
+
+        .text-d {
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: #6A6A6A;
+        }
+
+        input {
+            display: flex;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div><a href="/"><img src="sp_layout.png"></a></div>
+        <div id="header">
+            <ul>
+                <li><a href="">개인</a></li>
+                <li><a href="">기업</a></li>
+                <li><a href="">금융상품</a></li>
+            </ul>
+        </div>
+        <div id="header">
+            <div>
+                <ul>
+                    <li><a href="">금융서비스</a></li>
+                    <li><a href="">고객센터</a></li>
+                    <li><a href="">은행소개</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="header">
+            <ul>
+                <li><a href="">신한멤버스</a></li>
+                <li><a href="">GLOBAL</a></li>
+                <li><a href=""><img src="allsearch.png"></a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div id="menu1">
+        <ul>
+            <li><a href="#">고객상담</a></li>
+            <li><a href="#">금융소비자보호</a></li>
+            <li><a href="#">보안서비스</a></li>
+            <li><a href="#">자료실</a></li>
+            <li><a href="#">회원서비스</a></li>
+            <li><a href="#">사고신고</a></li>
+        </ul>
+    </div>
+    <div id="menu2">
+        고객센터 > 회원서비스 > 회원가입 > <img src="three line.png"><span>회원가입안내</span><img src="down.png" width="20" height="20">
+    </div>
+    <br></br>
+    <div id="txt_title">회원가입안내
+        <div id="txt_title">
+            <img src="T.png"><img src="print.png">
+        </div>
+    </div>
+    <hr>
+    <br>
+    <main>
+        <div class="content">
+            <div class="item1">
+                <div class="text-sinhan">신한은행에 오신것을 환영합니다.<div class="text-singan img"><img src="comp2.png"> </div>
+                </div>
+                <br></br>
+                <div class="text-sinhan2">신한은행 홈페이지 회원(14세 이상 개인)으로 가입하시면 각종상담,이벤트참여,계좌조회 등<br>
+                    다양한 서비스를 이용하실 수 있습니다.<br>
+                    ※ 단, 이체/상품 신규 등 금융거래를 원하실 경우 영업점에 방문하시어 '인터넷뱅킹' 서비스를 가입하셔야 합니다. </div>
+            </div>
+            <div class="text-a">
+                <br> - 회원 유형에 따라 가입 절차가 다르니 고객님께 해당하는 유형을 선택하여 주시기 바랍니다.
+            </div>
+            <div class="item2">
+                <p><img src="solo.png"><img src="giup.png"><img src="i-pin.png"></p>
+                <p>개인회원 기업회원 i-PIN회원</p>
+            </div>
+
+            <div class="text-a"><br>홈페이지 회원혜택
+            </div><br>
+            <div class="content_row">
+                <div class="item3">
+                    <h1>1</h1>
+                    <div class="text-c">이메일서비스
+                        <hr><br>
+                    </div>
+                    <div class="text-d">신한은행에서는 환율정보 등 다양한 정보를 보내드립니다. (입출내역 E-mail 통지서비스를 신청하신 고객에 한함) <br> </div>
+                    <input type="button" value="바로가기">
+                </div>
+                <div class="item4">
+                    <h1>2</h1>
+                    <div class="text-c">일반문의 상담
+                        <hr><br>
+                    </div>
+                    <div class="text-d">예금,대출,인터넷뱅킹 등 궁금하신 점을 홈페이지 고객센터에 등록하시면 빠른 시간내 답변을 드립니다. (상담이 집중될 경우 답변이 다소 지연될 수
+                        있습니다) <br> </div>
+                    <input type="button" value="바로가기">
+                </div>
+                <div class="item5">
+                    <h1>3</h1>
+                    <div class="text-c">인터넷 전화상담
+                        <hr><br>
+                    </div>
+                    <div class="text-d">음성상담,문자채팅,전화신청+문자채팅 등 인터넷상에서 정문상담사와 직접 상담을 하실 수 있습니다. <br> </div>
+                    <input type="button" value="바로가기">
+                </div>
+            </div>
+            <div class="item6">
+                <div class="text-c"><img src="check.png" width="20px"> 알아두세요.<br>
+                    <hr><br>
+                </div>
+                - 회원에 가입하시면 '신한은행 홈페이지 회원'으로 가입이 되며, 향후 추가서비스 발생시에도 자동으로 회원 가입이 됩니다.<br>
+                <br>- 개인회원(주민번호 방식) 또는 기업회원 가입 후 간편계좌 등록을 하시면 인증서 없이도 간편계좌조회 서비스를 이용하실 수 있습니다.<br>
+                (단,i-PIN 회원은 제외)<br>
+                <br>- 신한은행은 정보통신망 이용촉진에 관한 법률등 관련법령에 따라 고객 동의를 받은 후 회원가입을 받고 있습니다.<br>
+                <br>- 2006년 9월 24일부터 개정된 주민등록법에 의해 타인의 주민등록번호를 도용하여 홈페이지 회원가입을 하는 등 다른 사람의 주민등록번호를 부정사용자는 3년 이하의 징역 또는
+                1천만원 이하의 벌금의 부과됩니다.<br>
+                <br>- 관련 법률:주민등록법 제 21조(벌칙) 제2항 9호 (시행일 2006.9.24) <br>
+                <br>
+                <div class="text-c">- 만약,타인의 주민등록번호를 도용하여 홈페이지 회원가입을 하신 회원이 있으시다면 즉지 명의도용을 중지하여 주시기 바랍니다. </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        ㅇㄴ안미암ㄴ아ㅣㅁㄴ아ㅣㅁㄴ아ㅣㅁㄴ아ㅣㅁ
+    </footer>
+</body>
+
+</html>
