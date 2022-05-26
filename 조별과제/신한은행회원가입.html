@@ -155,22 +155,28 @@
             width: 100%;
             margin-left: 80px;
             margin-right: 80px;
-            padding: 40px;
+            padding: 30px;
         }
 
         .text-sinhan {
             font-size: 20px;
-            display: flex;
+            text-align: center;
+        }
+
+        .text-sinhan b {
+            color: rgba(39, 104, 224, 0.863);
+            font-size: 21px;
         }
 
         .text-sinhan2 {
             font-size: 14px;
-            display: flex;
-
+            text-align: center;
         }
 
         .text-a {
             margin-left: 80px;
+            color: #6A6A6A;
+            font-size: 18px;
         }
 
         .item2 {
@@ -184,7 +190,16 @@
             margin-right: 80px;
             margin-top: 10px;
             text-align: center;
-            padding: 40px;
+            padding: 20px;
+        }
+
+        .item2 img {
+            padding: 30px;
+        }
+
+        .item2 span {
+            color: black;
+            margin: 45px;
         }
 
         .item3 {
@@ -193,10 +208,11 @@
             border-width: 1px;
             height: 100%;
             width: 100%;
-            padding: 55px;
+            padding: 50px;
             margin-top: 20px;
             margin: 30px;
             font-size: 15px;
+            margin-left: 80px;
         }
 
         .item4 {
@@ -205,7 +221,7 @@
             border-width: 1px;
             height: 100%;
             width: 100%;
-            padding: 55px;
+            padding: 50px;
             margin-top: 20px;
             margin: 30px;
             font-size: 15px;
@@ -217,10 +233,11 @@
             border-width: 1px;
             height: 100%;
             width: 100%;
-            padding: 55px;
+            padding: 50px;
             margin-top: 20px;
             margin: 30px;
             font-size: 15px;
+            margin-right: 80px;
         }
 
         .item6 {
@@ -253,11 +270,41 @@
 
         footer {
             background-color: #6A6A6A;
+            color: #dfdfdf;
+            font-size: 15px;
+            padding: 50px;
+        }
+
+        nav a {
+            color: #dfdfdf;
+            font-size: 14px;
+            margin-left: 25px;
         }
 
         input {
             display: flex;
             margin-top: 20px;
+            background-color: #fdfdfd46;
+            border: 1px solid rgb(156, 156, 156);
+            color: black;
+            border-radius: 3px;
+            width: 80px;
+            height: 30px;
+        }
+
+        section p {
+            margin-left: 20px;
+        }
+
+        footer #input {
+            display: flex;
+            align-items: flex-start;
+            float: right;
+            margin-right: 20px;
+        }
+
+        footer #input img {
+            padding: 15px;
         }
     </style>
 </head>
@@ -315,22 +362,23 @@
     <main>
         <div class="content">
             <div class="item1">
-                <div class="text-sinhan">신한은행에 오신것을 환영합니다.<div class="text-singan img"><img src="comp2.png"> </div>
+                <div class="text-sinhan">
+                    <b>신한은행</b>에 오신것을 환영합니다.<img src="comp2.png">
                 </div>
                 <br></br>
-                <div class="text-sinhan2">신한은행 홈페이지 회원(14세 이상 개인)으로 가입하시면 각종상담,이벤트참여,계좌조회 등<br>
+                <div class="text-sinhan2">신한은행 홈페이지 회원(14세 이상 개인)으로 가입하시면 각종상담,이벤트참여,계좌조회 등
                     다양한 서비스를 이용하실 수 있습니다.<br>
                     ※ 단, 이체/상품 신규 등 금융거래를 원하실 경우 영업점에 방문하시어 '인터넷뱅킹' 서비스를 가입하셔야 합니다. </div>
             </div>
             <div class="text-a">
-                <br> - 회원 유형에 따라 가입 절차가 다르니 고객님께 해당하는 유형을 선택하여 주시기 바랍니다.
+                <br><b>- 회원 유형에 따라 가입 절차가 다르니 고객님께 해당하는 유형을 선택하여 주시기 바랍니다.</b>
             </div>
             <div class="item2">
-                <p><img src="solo.png"><img src="giup.png"><img src="i-pin.png"></p>
-                <p>개인회원 기업회원 i-PIN회원</p>
+                <img src="solo.png"><img src="giup.png"><img src="i-pin.png"> <br>
+                <span>개인회원</span> <span> 기업회원</span> <span>i-PIN회원</span>
             </div>
 
-            <div class="text-a"><br>홈페이지 회원혜택
+            <div class="text-a"><br><b>홈페이지 회원혜택</b>
             </div><br>
             <div class="content_row">
                 <div class="item3">
@@ -339,7 +387,7 @@
                         <hr><br>
                     </div>
                     <div class="text-d">신한은행에서는 환율정보 등 다양한 정보를 보내드립니다. (입출내역 E-mail 통지서비스를 신청하신 고객에 한함) <br> </div>
-                    <input type="button" value="바로가기">
+                    <input type="button" value=" 바로가기 ">
                 </div>
                 <div class="item4">
                     <h1>2</h1>
@@ -348,7 +396,7 @@
                     </div>
                     <div class="text-d">예금,대출,인터넷뱅킹 등 궁금하신 점을 홈페이지 고객센터에 등록하시면 빠른 시간내 답변을 드립니다. (상담이 집중될 경우 답변이 다소 지연될 수
                         있습니다) <br> </div>
-                    <input type="button" value="바로가기">
+                    <input type="button" value=" 바로가기 ">
                 </div>
                 <div class="item5">
                     <h1>3</h1>
@@ -356,7 +404,7 @@
                         <hr><br>
                     </div>
                     <div class="text-d">음성상담,문자채팅,전화신청+문자채팅 등 인터넷상에서 정문상담사와 직접 상담을 하실 수 있습니다. <br> </div>
-                    <input type="button" value="바로가기">
+                    <input type="button" value=" 바로가기 ">
                 </div>
             </div>
             <div class="item6">
@@ -378,7 +426,25 @@
     </main>
 
     <footer>
-        ㅇㄴ안미암ㄴ아ㅣㅁㄴ아ㅣㅁㄴ아ㅣㅁㄴ아ㅣㅁ
+        <nav>
+            <a href="#"><b>개인정보처리방침</b></a>
+            <a href="#"><b>신용정보활용체제</b></b></a>
+            <a href="#"><b>전자민원</b></a>
+            <a href="#">사고신고</a>
+            <a href="#">영업점안내</a>
+            <a href="#">웹접근성이용안내</a>
+            <a href="#">인증센터</a>
+            <div id="input">
+                <input type="button" value=" 글로벌 ">
+                <input type="button" value=" 패밀리 ">
+                <img src="up.png" width="30px" height="30px">
+            </div>
+        </nav>
+        <section>
+            <p><br><b>고객센터 1599-8000</b> 평일 09:00~18:00(은행휴무일 제외)</p>
+            <p> © SHINHAN BANK. All rights reserved.</p>
+        </section>
+        </div>
     </footer>
 </body>
 
