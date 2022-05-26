@@ -44,6 +44,19 @@
             background: rgb(45, 113, 196);
         }
 
+        .login {
+            display:block;
+            float: right;
+        }
+
+        .login p {
+            display: block;
+            float: right;
+            margin-right: 10px;
+            color: white;
+        }
+
+
         #menu1 ul {
             width: 100%;
             margin: 0 auto;
@@ -68,7 +81,7 @@
         }
 
         #menu2 {
-            display: flex;
+            display: block;
             background: rgb(25, 93, 174);
             color: #c2c2c2;
             padding: 5px;
@@ -92,7 +105,6 @@
             margin-left: 10px;
         }
 
-        main {}
 
         .content {
             display: flex;
@@ -112,7 +124,7 @@
 
 
 
-        .content .item {
+       /* .content .item {
             margin: 1em;
             height: 50px;
             flex-grow: 1;
@@ -144,7 +156,7 @@
 
         .content .item:nth-child(6) {
             width: 100%
-        }
+        } */
 
         .item1 {
             border-style: solid;
@@ -292,6 +304,15 @@
             height: 30px;
         }
 
+        nav input { 
+            color: white;
+            background-color: #6A6A6A;
+            border-radius: 3px;
+            width: 80px;
+            margin: 15px 5px 5px 10px
+        
+        }
+
         section p {
             margin-left: 20px;
         }
@@ -350,6 +371,13 @@
     </div>
     <div id="menu2">
         고객센터 > 회원서비스 > 회원가입 > <img src="three line.png"><span>회원가입안내</span><img src="down.png" width="20" height="20">
+        <div class="login">
+            <a href="/"><img src="login.png"><p>로그인</p></a>
+            </div> 
+        </div>
+           <!-- <div id="login">
+            <img src="login.png">로그인
+            </div> --> 
     </div>
     <br></br>
     <div id="txt_title">회원가입안내
