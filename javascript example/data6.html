@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열에 다양한 데이터 타입을 가진 원소 저장하기</title>
+</head>
+<body>
+    <script>
+        let x=5;
+        let arr=[100, "seoul", true, x];  //다양한 데이터 타입 저장
+        function printArr() {
+            let i;
+            for(i=0; i<arr.length; i++) {
+                document.write("배열 데이터 [" + i + "] = " +arr[i] + "<br>");
+            }
+        }
+        printArr();   //함수 호출
+    </script>
+</body>
+</html>
