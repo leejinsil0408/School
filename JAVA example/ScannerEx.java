@@ -3,11 +3,11 @@ import java.util.Scanner;  // java 안 scanner 클래스 import(가져옴,결합
 
     public class ScannerEx {// 클래스 이름(ScannerEx), public은 외부에서 자유롭게 가져와 쓸 수 있다는 뜻 
     
-    public static void main(String args[]) // main 메소드는 시작점
+    public static void main(String args[]) // main 메소드는 시작점  구분 - 계획 - 실행 
          {
         System.out.println("이름, 도시, 나이, 체중, 독신 여부를 분리하여 입력하세요");
         Scanner scanner = new Scanner(System.in);  
-        // Scanner:타입(int,string 같은) 선언, 구조를 만들고 변수명 scanner로 하겠다는 뜻
+        // Scanner:타입(int,string 같은) 선언, 새로 구조를 만든 scanner를 타입 scanner에 할당하겠다.
         // new는 클래스(설계도에 떠다니는 느낌) 메모리에 고유 영역을 갖고 있음(=인스턴스) 새로운 구조를 만들겠다는 뜻. (class 설계 도면 위 메모리에 새로 만들어지는 것)   
         // Scanner라는 설계 도면에 
         // system.in은 인자값. 데이터 주고받는 통로(System)안에 in 이라는 객체 받아옴.

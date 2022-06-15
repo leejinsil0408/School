@@ -50,13 +50,15 @@ class solution {
         }
         
 
-        StringBuffer text_test = new StringBuffer("helloww");
+       /*  StringBuffer text_test = new StringBuffer("helloww");
         text_test.append("abc");
         text_test.append("kkk");
         System.out.println(text_test.length());
-        return answer;
+        return answer; */
         // "김서방은 [배열위치]에 있다"
         // answer = text [배열위치] + 에 있다.     
-        }
+
+    }
+    return answer; 
     }
 }
