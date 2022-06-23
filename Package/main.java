@@ -1,9 +1,9 @@
-//import package0001.*;
-//import package0002.Overloading;
-//import package0003.*;
-import java.util.Scanner;
-import package0004.*;
-import java.util.ArrayList;
+// import package0001.*;
+// import package0002.Overloading;
+// import package0003.*;
+// import java.util.Scanner;
+// import package0004.*;
+// import java.util.ArrayList;
 
 
 public class main {
@@ -20,59 +20,59 @@ public class main {
 
 
     //    -------------------------- package0004 (선생님꺼) -------------------------------
-    //     Scanner input = new Scanner(System.in);
-    //     System.out.println("OS타입을 입력해주세요.");
-    //     System.out.println("1. MAC OS 일 경우 1을 입력하세요");
-    //     System.out.println("2. windows OS 일 경우 2를 입력하세요");
+        // Scanner input = new Scanner(System.in);
+        // System.out.println("OS타입을 입력해주세요.");
+        // System.out.println("1. MAC OS 일 경우 1을 입력하세요");
+        // System.out.println("2. windows OS 일 경우 2를 입력하세요");
 
-    //     int osType = input.nextInt();
-    //     OsCheck.osCheck(osType);
+        // int osType = input.nextInt();
+        // OsCheck.osCheck(osType);
 
-    //     boolean checkComputerwile = true;
-    //     ArrayList<String> computerArray = new ArrayList<String>();
+        // boolean checkComputerwile = true;
+        // ArrayList<String> computerArray = new ArrayList<String>();
 
-    //     boolean branch = false;
-    //     String checkOk = "";
-    //     String computerInputData = "";
+        // boolean branch = false;
+        // String checkOk = "";
+        // String computerInputData = "";
 
-    //     while(checkComputerWile) {
-    //         System.out.println("컴퓨터 사양을 입력해주세요.");
-    //         System.out.println("ex) cpu:i7, ram:8g, ssd:128g ..");
+        // while(checkComputerWile) {
+        //     System.out.println("컴퓨터 사양을 입력해주세요.");
+        //     System.out.println("ex) cpu:i7, ram:8g, ssd:128g ..");
 
-    //         computerInputData = input.nextLine();
-    //         System.out.println("입력하신 내용이 다음과 같습니까? 맞으면 yes, 아니면 no를 입력해주세요.");
+        //     computerInputData = input.nextLine();
+        //     System.out.println("입력하신 내용이 다음과 같습니까? 맞으면 yes, 아니면 no를 입력해주세요.");
 
-    //         System.out.println(computerInputData);
-    //         checkOk = input.nextLine();
+        //     System.out.println(computerInputData);
+        //     checkOk = input.nextLine();
 
-    //         branch = CheckYn.CheckYn(checkOk, "inputCheck");
-    //         if(branch) {
-    //             computerArray.add(computerInputData);
-    //         }
-    //          else {
-    //             continue;
-    //         };
+        //     branch = CheckYn.CheckYn(checkOk, "inputCheck");
+        //     if(branch) {
+        //         computerArray.add(computerInputData);
+        //     }
+        //      else {
+        //         continue;
+        //     };
 
-    //         System.out.println("데이터를 계속 입력하겠습니까? 맞으면 yes, 아니면 no를 입력해주세요.");
-    //         checkOk = input.nextLine();
-    //         branch = CheckYn.CheckYn(checkOk, "brakeCheck");
+        //     System.out.println("데이터를 계속 입력하겠습니까? 맞으면 yes, 아니면 no를 입력해주세요.");
+        //     checkOk = input.nextLine();
+        //     branch = CheckYn.CheckYn(checkOk, "brakeCheck");
 
-    //         if(branch) {
-    //             continue;
-    //         } else {
-    //             break;
-    //         }
+        //     if(branch) {
+        //         continue;
+        //     } else {
+        //         break;
+        //     }
 
 
-    //         //입력구문 출력
-    //         for(String i : computerArray) {
-    //             System.out.println(i);
-    //             String[] splitCheck = i.split(",");
-    //             for(String j : splitCheck) {
-    //             String[] dataCheck = j.split(",")
-
-    //     }
-    //         }
+        //     //입력구문 출력
+        //     for(String i : computerArray) {
+        //         System.out.println(i);
+        //         String[] splitCheck = i.split(",");
+        //         for(String j : splitCheck) {
+        //         String[] dataCheck = j.split(",")
+        //         }
+        // }
+        //     }
     // 배열을 ,와 : 기준으로 분해하여 저장
     // input 데이터 무결성 체크 (데이터가 잘 왔는지 확인)
     // 인자값을 통해 인스턴스 생성자 생성
