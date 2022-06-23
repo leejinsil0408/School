@@ -1,25 +1,41 @@
 package Slimeland;
-
+import Slimeland.Warrior;
+import Slimeland.WarriorType;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class main3 {
+public class Gamemain {
     public static void main(String[] arg) {
 
-        String input_1 = "";
-        String input_2 = "";
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("용사의 이름을 적어주세요");
-        input_1 = scan.nextLine();
+        String WarriorName = "";
+        String input_2 = ""; 
 
         Scanner scan2 = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("* * * * * SlimeGame * * * * *");
+
         System.out.println("용사의 직업을 선택하세요");
-        System.out.println("1.마법사 2.기사 3.궁수");
+        System.out.println("1.기사");
+        System.out.println("2.마법사");
+        System.out.println("3.궁수");
+        int warriorjob = scan2.nextInt();
+        WarriorType.warriortype(warriorjob);
 
-        input_2 = scan.nextLine();
 
-        Warrior warrior = new Warrior(input_1, 1000, 3000 );
+        System.out.println("용사의 이름을 적어주세요");
+        WarriorName = scan.nextLine();
+        
+
+
+
+        boolean checkwarriorjob = true;
+        
+        System.out.println("입력한 정보로 시작하시겠습니까? 맞으면 yes, 아니면 no를 입력해주세요");
+        
+
+        Warrior warrior = new Warrior(WarriorName, 1000, 3000 );
 
         warrior.info();
 

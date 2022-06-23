@@ -3,6 +3,7 @@ public class Warrior {
     public String name;
     public int hp;
     public int mp;
+    public int level;
 
     public Warrior(String input_name, int input_hp, int input_mp) {
     this.name = input_name;
