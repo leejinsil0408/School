@@ -1,6 +1,4 @@
-package Slimeland;
-import Slimeland.Warrior;
-
+package SlimeLand.SlimeLand;
 public class WarriorType {
 
     public static void WarriorType(int warriorjob) {
