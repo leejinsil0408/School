@@ -1,4 +1,4 @@
-package Slimeland;
+package Slimeexample;
 
 public class WarriorType {
     public static void warriortype(int checkType) {

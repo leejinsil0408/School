@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import SlimeSlimeextends.*;
 
 
@@ -15,7 +14,6 @@ public class main {
         redSlime.initSlime();
         redSlime.getColor();
     }
-
 
     private static void usePotion() {
     //용사의 인벤토리에 아이템 번호를 가지고 포션을 사용합니다
