@@ -10,4 +10,10 @@ public class Wednesday extends foodkim {
         this.name = "단호박 샌드위치";
         this.sweetPumkin = "단호박";
     }
+
+    public void info() {
+        System.out.println("오늘은 수요일, " + this.name + " 입니다.");
+        System.out.println("-----" + this.name + " 재료-----" );
+        System.out.println(this.sweetPumkin + "이 필요합니다.");
+    }
 }

@@ -11,4 +11,10 @@ public class Monday extends foodkim {
         this.Bluebarry = "블루베리";
         this.bacon = "베이컨";
     }
+
+    public void info() {
+        System.out.println("오늘은 월요일, " + this.name + " 입니다.");
+        System.out.println("-----" + this.name + " 재료-----" );
+        System.out.println(this.Bluebarry + "와 " + this.bacon + "이 필요합니다.");
+    }
 }

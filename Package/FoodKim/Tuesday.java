@@ -12,8 +12,8 @@ public class Tuesday extends foodkim {
     }
 
     public void info() {
-        System.out.println("오늘은 화요일 ");
-        System.out.println("-----" + this.name + "-----" );
-        System.out.println("재료는 " + s);
+        System.out.println("오늘은 화요일, " + this.name + " 입니다.");
+        System.out.println("-----" + this.name + " 재료-----" );
+        System.out.println(this.lettuce + "와 " + this.bacon + "이 필요합니다.");
     }
     }
