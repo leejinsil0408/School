@@ -1,4 +1,4 @@
-package SlimeSlime;
+package SlimeSlimeextends;
 
 public class Slime {
     //필드값 (슬라임의 hp,mp ...)

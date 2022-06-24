@@ -1,4 +1,4 @@
-package SlimeSlime;
+package SlimeSlimeextends;
 
 public class Warrior {
     public String name;

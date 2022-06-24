@@ -16,6 +16,9 @@ public class Gamemain {
 
         System.out.println("* * * * * SlimeGame * * * * *");
 
+        boolean game = true;
+
+        // while(game) {
         System.out.println("용사의 직업을 선택하세요");
         System.out.println("1.기사");
         System.out.println("2.마법사");
