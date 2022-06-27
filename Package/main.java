@@ -3,6 +3,9 @@
 // import package0003.*;
 import java.util.Scanner;
 import package0004.*;
+import package0004.Computermake.CheckYn;
+import package0004.Computermake.OsCheck;
+
 import java.util.ArrayList;
 
 

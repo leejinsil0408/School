@@ -1,9 +1,9 @@
-package Slimeexample;
+package Slimeexample.Slimeexample;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Slimeexample.Warrior;
-import Slimeexample.WarriorType;
+import Slimeexample.Slimeexample.Warrior;
+import Slimeexample.Slimeexample.WarriorType;
 
 
 public class Gamemain {

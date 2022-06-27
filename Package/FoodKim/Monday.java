@@ -6,7 +6,7 @@ public class Monday extends foodkim {
     public String Bluebarry;
     public String bacon;
 
-    public Monday(String name, String Bluebarry, String bacon) {
+    public Monday() {
         this.name = "블루베리 샌드위치";
         this.Bluebarry = "블루베리";
         this.bacon = "베이컨";
@@ -14,7 +14,7 @@ public class Monday extends foodkim {
 
     public void info() {
         System.out.println("오늘은 월요일, " + this.name + " 입니다.");
-        System.out.println("-----" + this.name + " 재료-----" );
+        System.out.println(" * * * " + this.name + " 재료 * * * " );
         System.out.println(this.Bluebarry + "와 " + this.bacon + "이 필요합니다.");
     }
 }

@@ -1,4 +1,4 @@
-package Slimeexample;
+package Slimeexample.Slimeexample;
 public class Warrior {
     public String name;
     public int hp;

@@ -1,4 +1,4 @@
-package SlimeSlimeextends;
+
 
 //Extends를 통해 NamalSlime의 데이터를 물려받았습니다 (상속)
 public class RedSlime extends NormalSlime {

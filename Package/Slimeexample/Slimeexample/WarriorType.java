@@ -1,4 +1,4 @@
-package Slimeexample;
+package Slimeexample.Slimeexample;
 
 public class WarriorType {
     public static void warriortype(int checkType) {

@@ -1,4 +1,4 @@
-package package0004;
+package package0004.Computermake;
 
 public class Computer {
 
