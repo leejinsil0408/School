@@ -27,4 +27,5 @@ public class main {
     System.out.println("용사는 포션을 사용하여 HP " + effectHP + "를 회복하였습니다");
     System.out.println("용사는 포션을 사용하여 HP " + effectHP_x3 + "를 회복하였습니다");
     }
+    
 }

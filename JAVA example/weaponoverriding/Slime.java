@@ -17,4 +17,10 @@ public class Slime {
     public int att() {
         return 10;
     }
+
+    public void dmg(int dmg) {
+        this.hp = this.hp - dmg;
+        System.out.println(this.name + "은 " + dmg + "공격을 받았습니다");
+    }
+
 }

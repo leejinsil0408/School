@@ -35,10 +35,8 @@ public class Slime {
     public void die() {
         if(this.hp <= 0 ) {
             System.out.println("꾸에엑! " + this.name + "을 퇴치하였습니다. ");
-            System.out.println("  ");
         } else {
             System.out.println("슬라임이 억울해합니다. ");
-            System.out.println("  ");
         }
     
     }

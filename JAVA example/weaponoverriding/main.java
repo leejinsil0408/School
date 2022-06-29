@@ -18,10 +18,12 @@ public class main {
     용사 입장에서 가지고 있는 무기 타입의 공격범위와 공격력을 확인한다
     용사 입장에서 가지고 있는 무기 타입을 교체하는 시간까지 고려하여 연산
     효율적인 방식을 선택하여 진행 */
+
     
     public static void main(String[] arg) {
 
         CreateSlime();
+
     }
 
     public static void CreateSlime() {
@@ -45,11 +47,11 @@ public class main {
         RedSlime red_2_slime = new RedSlime(input_hp,input_mp,arrSlimeName[num], arrSlimeName[num]);
 
         red_1_slime.getColor();
-        System.out.println(red_1_slime.getName()+"의 공격력은 " +red_1_slime.att());
+        System.out.println(red_1_slime.getName()+"의 공격력은 " +red_1_slime.att() + "입니다.");
         red_1_slime.att();
 
         red_1_slime.getColor();
-        System.out.println(red_2_slime.getName()+"의 공격력은 " +red_1_slime.att());
+        System.out.println(red_2_slime.getName()+"의 공격력은 " +red_1_slime.att() + "입니다.");
 
     } 
 
@@ -63,6 +65,11 @@ public class main {
 
     }
 
-
-
+    public static void Warrior() {
+        Warrior warrior = new Warrior("이진실",1000, 500);
+        warrior.info();
+        warrior.att();
+        System.out.println();
+        
+    }
 }

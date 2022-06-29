@@ -16,6 +16,6 @@ public class Warrior {
         System.out.println("-----" + this.name + "-----");
         System.out.println("hp : " + this.hp );
         System.out.println("mp : " + this.mp );
-        System.out.println(" Game Start! ");
+        // System.out.println(" Game Start! ");
     }
 }

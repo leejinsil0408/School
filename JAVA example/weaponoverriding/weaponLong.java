@@ -18,13 +18,5 @@ public class weaponLong extends weaponBasic {
             attAction();
         }
 
-
-
-    /*@Override
-        public void destruction() {
-        if(this.name == "롱소드") {
-
-            }
-        }
-            */
 }
+            

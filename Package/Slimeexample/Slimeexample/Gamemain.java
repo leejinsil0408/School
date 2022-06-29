@@ -27,12 +27,9 @@ public class Gamemain {
         int warriorjob = scan2.nextInt();
         WarriorType.warriortype(warriorjob);
 
-
         System.out.println("용사의 이름을 적어주세요");
         WarriorName = scan.nextLine();
         
-
-
 
         boolean checkwarriorjob = true;
         

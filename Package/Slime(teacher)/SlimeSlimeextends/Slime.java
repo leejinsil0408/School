@@ -14,7 +14,6 @@ public class Slime {
         this.mp = 0;
     }
 
-
     public Slime(String input_name,int input_hp, int input_mp) {
         this.name = input_name;
         this.hp = input_hp;
