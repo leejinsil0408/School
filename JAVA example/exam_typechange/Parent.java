@@ -1,3 +1,5 @@
+package exam_typechange;
+
 public class Parent {
     
     public String bagName;

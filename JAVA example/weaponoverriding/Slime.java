@@ -1,3 +1,4 @@
+package weaponoverriding;
 public class Slime {
     
     public String name;

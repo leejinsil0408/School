@@ -1,3 +1,4 @@
+package weaponoverriding;
 public class weaponlance extends weaponBasic {
     weaponlance() {
         this.name = "랜스";

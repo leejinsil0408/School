@@ -1,3 +1,4 @@
+package weaponoverriding;
 public class weaponShort extends weaponBasic {
     weaponShort() {
         this.name = "숏소드";

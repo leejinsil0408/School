@@ -1,5 +1,6 @@
-import exam_typechange;
-import Child;
+package exam_typechange;
+
+
 
 public class main {
     public static void main(String[] arg) {

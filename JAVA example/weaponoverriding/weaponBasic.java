@@ -1,3 +1,5 @@
+package weaponoverriding;
+
 public class weaponBasic {
     public final String defaultName = "주먹";
     public final int defaultAttRange = 1;

@@ -1,4 +1,4 @@
-
+package FoodKim;
 public class Friday extends foodkim {
     //금요일 샌드위치 재료 빵, 버터, 아보카도, 계란
     //아보카도 샌드위치

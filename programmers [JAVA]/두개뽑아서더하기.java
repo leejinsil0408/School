@@ -49,7 +49,7 @@ class Solution {
         return answer;
     }
     }
-
+}
 
 
 //   풀이법

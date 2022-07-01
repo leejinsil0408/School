@@ -1,3 +1,5 @@
+package weaponoverriding;
+
 public class Warrior {
     public String name;
     public int hp;

@@ -1,3 +1,5 @@
+package exam_typechange;
+
 public class Child {
     public class Child extends Parent {
 

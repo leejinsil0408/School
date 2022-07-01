@@ -1,3 +1,4 @@
+package ScannerEx;
 
 public class SingletinEx {
     

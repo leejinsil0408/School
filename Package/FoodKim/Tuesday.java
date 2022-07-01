@@ -1,3 +1,4 @@
+package FoodKim;
 public class Tuesday extends foodkim {
     //화요일 샌드위치 재료 빵, 버터, 상추, 베이컨
     //상추베이컨 샌드위치

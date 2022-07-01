@@ -1,3 +1,4 @@
+package weaponoverriding;
 public class main {
 
     /* 용사는 슬라임을 잡기 위해 무기 교체 시스템을 개발하려고 합니다

@@ -1,4 +1,7 @@
-public class SupersonicAirplane extends Ariplane {
+package exam_super;
+import exam_super.Airplane;
+
+public class SupersonicAirplane extends Airplane {
     public static final int NORMAL = 1;
     public static final int SUPERSONIC = 2;
 

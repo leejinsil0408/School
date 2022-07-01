@@ -2,31 +2,74 @@ public class CountingStar {
 
     public static void main(String[] arg) {
 
-    //직사각형 만들기 
-/*      int i;
-        int j;
+        /*
+        //직사각형 만들기
+        int x;
+        int y;
 
-        for(i=0; i<6; i++) {
-            for(j=0;j<6; j++) {
-                System.out.print("*");
-            }System.out.println("*");
+        for(x=0; x<6; x++) {
+        for(y=0;y<6; y++) {
+        System.out.print("*");
+        }System.out.println("*");
         }
-    } */
-    
-
-    //직각삼각형 만들기
-        int i;
-        int j;
-
-        for(i=0; i<6; i++) {
-            for(j=0; j<6; j++) {
-                System.out.println("*");
-            }System.out.println("*");
         }
-    
-    //정삼각형 만들기
-    //마름모 만들기
-    //원 만들기 
+        }
+         */
 
 
+
+        // 직각삼각형 만들기
+        
+        /*
+        int x;
+        int y;
+          
+        for(y=0; y<10; y++) {
+        for(x=0; x<y; x++) {
+        System.out.print("1");
+        }
+        System.out.println("3");
+        }
+        }
+        } 
+        */
+         
+
+        // 반대 직각삼각형 만들기2
+
+        int x;
+        int y;
+        int j;
+        for(x=0; x<7; x++) {
+            for( y=0; y<6-x; y++) {
+            System.out.print("1");
+        }
+        for(j = 0; j<x; j++) {
+        System.out.print("*");
+        }
+        System.out.println("");
+        } 
     }
+}
+
+
+
+        //역직각삼각형 만들기
+/* 
+        int x;
+        int y;
+
+        for(y=10; y>0; y--) {
+            for(x=0; x>0-y; x--) {
+                System.out.print("*");
+            }
+            System.out.println("1");
+        }
+    }
+} */
+
+
+// 정삼각형 만들기
+
+// 마름모 만들기
+// 원 만들기

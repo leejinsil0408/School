@@ -1,3 +1,4 @@
+package weaponoverriding;
 public class RedSlime extends Slime {
 
     public RedSlime(int input_hp, int input_mp, String input_color, String input_name) {
