@@ -1,5 +1,5 @@
 package exam_typechange;
-
+import java.util.Scanner;
 
 
 public class main {

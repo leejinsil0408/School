@@ -1,3 +1,4 @@
+package JavaExample.MakeStar;
 public class CountingStar {
 
     public static void main(String[] arg) {
