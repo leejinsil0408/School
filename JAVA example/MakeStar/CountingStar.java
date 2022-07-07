@@ -14,7 +14,6 @@ public class CountingStar {
         }System.out.println("*");
         }
         }
-        }
          */
 
 
