@@ -11,11 +11,9 @@ public class Exercise182_07 {
         }
         System.out.println("max: " + max);
     }
+}
 
 
-    }
-//        int max = 0;
-//        int[] array = {1, 5, 3, 8, 2};
 //        for (int i = 0; i < 5; i++) {
 //            int a = array[i];
 //            if (max < a)
