@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 변수를 사용해 속성값 설정하기</title>
+    <script>
+        function add() { //property로 html dom 트리 안에서 존재
+        let img=document.createElement('img');
+        img.src='test.png';
+        img.width=100;
+        img.height=122;
+        document.body.appendChild(img);
+    };
+    </script>
+</head>
+<body>
+    <a href="#" onclick="add()">[이미지 추가]</a>
+</body>
+</html>

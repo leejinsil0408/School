@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>그리드 이용한 회원가입</title>
+    <style>
+        .grid-container { 
+            display: grid;
+            grid-template: 1fr 1fr 1fr /1fr 1fr 1fr;
+            text-align: center;
+        }
+
+        .grid-items { 
+            background-color: #007355;
+            color: #fff;
+            font-size: 30px;
+        }
+         
+          .grid-items1 {        
+            /* grid-area : col start / row start / clo end / row end; */
+            grid-area: 1 / 1 / 2/ 4;
+        }
+          
+        
+        .grid-items2 {
+            grid-area: 2 / 1 / 3 /4;
+        }
+         
+        .grid-items3 {
+            grid-area: 4 / 1 / 5 / 4;
+        }
+
+    </style>
+</head>
+<body>
+     <div class="grid-container"> 
+        <div class="grid-items1">1</div>
+        <div class="grid-items">2</div>
+        <div class="grid-items2">3</div>
+        <div class="grid-items">4</div>
+        <div class="grid-items3">5</div>
+        <div class="grid-items">6</div>
+     </div>  
+</body>
+</html>

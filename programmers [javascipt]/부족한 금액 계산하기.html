@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부족한 금액 계산하기</title>
+</head>
+
+<body>
+    <script>
+
+        /* 문제설명  원래 이용료 : price원 , count번 이용 시 배로
+         갖고 있는 돈 : money
+         count번 타면 money에서 모자라는 금액 return (부족하지 않으면 0 return)
+         total : 총 필요한 놀이기구 이용 금액 */
+
+
+
+
+
+        // price * count : 이용료  
+
+        // 이용료, 현재금액, 이용횟수
+        function solution(price, money, count) {
+            let total = 0;
+            // 총 필요한 놀이기구 금액 변수 선언
+
+            for (let i = 0; i <= count; i++) // for문으로 변수 i는 count(놀이기구 타는 횟수) 1씩 증가
+            { total += price * i }
+            // total(놀이기구 이용에 필요한 총 금액) = price(놀이기구 이용료) * i 값을 total에 더함(+=) 
+
+            if (total > money) {
+                return total - money;
+            }
+            /* money(내가 가지고 있는 금액)보다 total(놀이기구 이용에 필요한 총 이용 금액)이 크다면,
+               total - money를 하여 금액이 부족한만큼 return한다. */
+
+            else {
+                return 0;
+            }
+        }   // 만약 그렇지 않은 경우 (money가 부족하지 않은 경우) 0을 return한다. 
+
+
+
+        console.log(solution(price, money, count))
+
+
+
+
+
+        // 조건연산자 (조건식을 판별하여 참이냐 거짓이냐에 따라 선택적으로 실행, 큰 값을 저장)
+        return (money > total) ? 0 : total - money
+        // total보다 크면 0을, 모자르지 않다면 total에서 money를 뺀 금액 return
+
+
+        function solution(price, money, count) {
+            var answer = 0;
+            var n;
+            var a = price;
+            var b = money;
+            var m = count;
+            var result;
+            for (n = 1; n <= m; n++) {
+                result = a * n;
+                answer += result;
+            }
+            if (answer > b) {
+                answer = answer - b;
+            }
+            else {
+                answer = 0;
+            }
+            return answer;
+        }      
+        solution(3, 20, 4);                              //성진님 답
+    </script>
+</body>
+
+</html>

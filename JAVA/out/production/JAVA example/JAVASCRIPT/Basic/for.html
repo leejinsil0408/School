@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <script>
+         //x++ : i = i+1 i가0이면 i++하면 0이고, 반복문 이후에 i++하면 1이 됨 
+            // i=0일 때 ++i 를 하면 1이 뜸 . ++i가 있으면 사용할 때 i의 값이 증가, ++가 뒤에 있으면 기존의 값을 사용하고 증가시킴  
+       
+            /* var x, y;
+        for (x=2; x<=5; x++) { 
+             document.write("<b> ---[" + x + "단]--- </b>" + "<br>");
+             for (y=1; y<=9; y++) {
+             document.write(x+"*" + y + "=" + (x*y) + "<br>");
+             }
+            }  */
+ 
+        let x=3;
+        let sum= 2;
+         /* for(x=0; x<=5; x++) { 
+            (sum+=x) (sum = x+sum) 
+           (sum*=x*sum)  (sum= x*sum)
+        }     */
+       document.write(sum*=x); 
+    </script>
+</body>
+</html>

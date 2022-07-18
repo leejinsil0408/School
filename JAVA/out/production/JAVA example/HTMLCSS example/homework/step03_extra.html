@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>extra03_CSS효과와 애니메이션</title>
+    <style>
+        a:link { 
+            opacity: 0.5; 
+        }
+        a:hover { 
+            opacity: 1.0; 
+        }
+        img { 
+            opacity: 0.2; 
+        }
+        img:hover { 
+            opacity: 1.0; 
+        }
+        div.background {
+            background: url(sky.jpg) repeat;
+            border: 1px solid black;
+        }
+        div.box {
+            margin: 30px;
+            background-color: #ffffff;
+            border: 2px solid blue;
+            opacity: 0.5;
+        }
+        div.box p {
+            margin: 5%;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+        }
+        div.tip { 
+            opacity: 0.2; 
+        }
+        div.ans { 
+            opacity: 0.0; 
+        }
+        div.tip:hover { 
+            opacity: 1.0; 
+            color: red; 
+        }
+        div.ans:hover { 
+            opacity: 1.0; 
+            color: blue; 
+        }
+        .v1 { 
+             visibility: hidden; 
+             border: 1px dotted red; 
+         }
+         .v2 { 
+            visibility: visible;    
+            border: 1px dotted red;
+         }
+         .v3 { 
+          display: none; 
+          border: 1px dotted red; 
+        }
+        p strong {
+            color: blue;
+            border: 1px dotted red;
+        }
+        p.bk strong {
+            display: block;
+            color: blue;
+            border: 1px dotted red;
+        }
+        ul.in li {
+            display: inline;
+            background-color: yellow;
+            border: 1px solid;
+            border-color: blue;
+            margin: 3px;
+            padding: 5px;
+        }
+        #grad1 {
+          height: 70px;
+          background: red; 
+          background: linear-gradient(270deg, red, yellow); 
+        }
+        #grad2 {
+          height: 70px;
+          background: red; 
+          background: linear-gradient(red, yellow, green); 
+        }
+        #grad3 {
+          height: 70px;
+          background: red; 
+          background: linear-gradient(red, orange, yellow, green, blue, indigo, violet); 
+        }
+        #grad4 {
+          height: 70px;
+          background: red; 
+          background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+          #grad1 {
+            height: 70px;
+            background: red; 
+            background: radial-gradient(yellow, green); }
+        #grad2 {
+            height: 70px;
+            background: red; 
+            background: radial-gradient(red, yellow, green); }
+        #grad3 {
+            height: 70px;
+            background: red; 
+            background: radial-gradient(red 5%, yellow 15%, green 60%) }
+        #grad4 {
+            height: 100px;
+            width: 150px;
+            background: red; 
+            background: radial-gradient(circle, red, yellow, green); }
+
+          </style>
+</head>
+<body>
+    <h3>마우스를 올리면 선명하게 보입니다.</h3>
+    <div>
+        <a href="http://www.google.com">구글 웹 사이트</a>
+    </div>
+    <p></p>
+    <div>
+        <img src="pic1.jpg">
+    </div>
+    
+    <div class="background">
+    <div class="box">
+        <p>HTML5 웹 프로그래밍</p>
+    </div>
+    </div>
+        <p>[문제] CSS3에서 불투명도를 적용하기 위한 속성은?</p>
+        <p>① border</p>  
+        <p>② opacity</p> 
+        <p>③ transparency</p> 
+        <p>④ visible</p> 
+        [힌트] <div class="tip">'불투명'을 뜻하는 영문 단어를 찾아보세요.</div>
+        <p></p>
+        [정답] <div class="ans">정답은 ②번입니다.</div>
+        
+    <div class="v1"> <!-- 보이지 않도록 설정: 공간 있음 -->
+        <img src="pic1.jpg">
+    </div>
+    <div class="v2">
+        <img src="pic1.jpg">
+    </div>
+    <div class="v3"> <!-- 보이지 않도록 설정: 공간 삭제 -->
+        <img src="pic1.jpg">
+    </div>
+    <div class="v2">
+        <img src="pic1.jpg">
+    </div>
+    <h3>[인라인 형식]</h3>
+    <p> 세계적인 IT 기업에는 <strong>Google</strong> <strong>Apple</strong> <strong>Oracle</strong> 등이 있습니다.</p>
+    <h3>[블록 형식으로 변환한 후]</h3>
+    <p class="bk"> 세계적인 IT 기업에는 <strong>Google</strong> <strong>Apple</strong> <strong>Oracle</strong> 등이 있습니다.</p>    
+    <h4>[블록 형식]</h4>
+    <ul>
+        <li><a href="http://www.google.com">Google</a></li>
+        <li><a href="http://www.apple.com">Apple</a></li>
+        <li><a href="http://www.oracle.com">Oracle</a></li>
+    </ul>
+    <h4>[인라인 형식으로 변환한 후]</h4>
+    <ul class="in">
+        <li><a href="http://www.google.com">Google</a></li>
+        <li><a href="http://www.apple.com">Apple</a></li>
+        <li><a href="http://www.oracle.com">Oracle</a></li>
+        <h4>2색 선형 그레이디언트</h4>
+    <div id="grad1"></div>
+    <h4>3색 선형 그레이디언트</h4>
+    <div id="grad2"></div>
+    <h4>7색 선형 그레이디언트</h4>
+    <div id="grad3"></div>
+    <h4>2색 선형 그레이디언트(to right)</h4>
+    <div id="grad4"></div>
+    <p><strong>참고:</strong> 최신 브라우저를 사용해주시기 바랍니다.</p>
+    <h4>기본 2색 원형 그레이디언트</h4>
+    <div id="grad1"></div>
+    <h4>3색 원형 그레이디언트 </h4>
+    <div id="grad2"></div>
+    <h4>색상 영역 지정(% 단위)</h4>
+    <div id="grad3"></div>
+    <h4>원형 모양 지정(ellipse, circle)</h4>
+    <div id="grad4"></div>
+    <p><strong>참고: </strong>최신 브라우저를 사용해주시기 바랍니다.</p>
+
+</body>
+</html>
