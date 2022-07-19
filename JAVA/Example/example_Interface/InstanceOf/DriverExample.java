@@ -1,17 +1,16 @@
 package example.example_Interface.InstanceOf;
 
-import example.example_Interface.parameter_polymorphism.Bus;
-import example.example_Interface.parameter_polymorphism.Driver;
-import example.example_Interface.parameter_polymorphism.Taxi;
-
+//p 375 객체타입확인(instanceof)
 public class DriverExample {
     public static void main(String[] args) {
-        example.example_Interface.parameter_polymorphism.Driver driver = new Driver();
+        Driver driver = new Driver();
 
-        example.example_Interface.parameter_polymorphism.Bus bus = new Bus();
+        Bus bus = new Bus();
         Taxi taxi = new Taxi();
 
-        driver.drive(bus);      //자동타입변환 Vehicle vehicle = bus;
-        driver.drive(taxi);     //자동타입변환 Vehicle vehicle = taxi;
+        driver.Drive(bus);
+        driver.Drive(taxi);
     }
+
 }
+

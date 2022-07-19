@@ -24,9 +24,9 @@ public class AnimalExample {
         //메소드의 다형성
         animalSound(new Dog());
         animalSound(new Cat());
-    }
-        System.out.println("--------------------------------");
 
+        System.out.println("--------------------------------");
+    }
 
     public static void animalSound(Animal animal) {
                                     //Dog,Cat의 자동 타입 변환
