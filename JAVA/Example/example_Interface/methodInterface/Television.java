@@ -1,4 +1,6 @@
-package example.example_Interface;
+package example.example_Interface.methodInterface;
+
+import example.example_Interface.methodInterface.RemoteControl;
 
 public class Television implements RemoteControl {
     //필드

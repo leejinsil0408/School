@@ -1,4 +1,4 @@
-package example.example_Interface;
+package example.example_Interface.methodInterface;
 //p348 인터페이스
 // 상수와 메소드만으로 구성 (메소드:상수,추상,디폴트,정적)
 public interface RemoteControl {
