@@ -1,4 +1,4 @@
-package example.Inheritance.Casting;
+package example_Inheritance.Casting;
 
 public class ChildExample {
     public static void main(String[] args) {
