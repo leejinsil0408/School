@@ -1,4 +1,4 @@
-package example_Class.Values;
+package example.example_Class.Values;
 
 //216p 매개변수의 수를 모를 경우
 public class Computer {

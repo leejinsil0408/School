@@ -1,4 +1,4 @@
-package example_Class.Values;
+package example.example_Class.Values;
 
 public class ComputerExample {
     public static void main(String[] args) {
