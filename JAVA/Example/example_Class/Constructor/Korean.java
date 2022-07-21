@@ -1,4 +1,4 @@
-package example.Constructor;
+package example_Class.Constructor;
 
 public class Korean {
     //필드

@@ -10,6 +10,10 @@
       <sourceFolder url="file://$MODULE_DIR$/example_overriding" isTestSource="false" packagePrefix="exam_overriding" />
       <sourceFolder url="file://$MODULE_DIR$/example_super" isTestSource="false" packagePrefix="exam_super" />
       <sourceFolder url="file://$MODULE_DIR$/example_typechange" isTestSource="false" packagePrefix="exam_typechange" />
+      <excludeFolder url="file://$MODULE_DIR$/example_Class/ScannerEx" />
+      <excludeFolder url="file://$MODULE_DIR$/example_Class/Singleton" />
+      <excludeFolder url="file://$MODULE_DIR$/example_Inheritance/Final" />
+      <excludeFolder url="file://$MODULE_DIR$/example_Inheritance/Typechange" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

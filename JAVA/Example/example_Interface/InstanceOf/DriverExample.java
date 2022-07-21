@@ -1,4 +1,4 @@
-package example.example_Interface.InstanceOf;
+package example_Interface.InstanceOf;
 
 //p 375 객체타입확인(instanceof)
 public class DriverExample {

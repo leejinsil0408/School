@@ -1,4 +1,4 @@
-package example.Constructor;
+package example_Class.Constructor;
 
 public class KoreanExample {
     public static void main(String[] args) {

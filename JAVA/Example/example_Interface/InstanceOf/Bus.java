@@ -1,6 +1,5 @@
-package example.example_Interface.InstanceOf;
+package example_Interface.InstanceOf;
 
-import example.example_Interface.Casting.Vehicle;
 
 public class Bus implements Vehicle {
     @Override

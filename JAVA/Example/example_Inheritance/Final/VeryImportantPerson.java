@@ -1,4 +1,4 @@
-package example.Inheritance.Final;
+package example.example_Inheritance.Final;
 
 public class VeryImportantPerson extends Member{
 }

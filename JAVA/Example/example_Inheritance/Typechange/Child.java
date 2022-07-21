@@ -1,4 +1,4 @@
-package example.Inheritance.Typechange;
+package example.example_Inheritance.Typechange;
 
 public class Child {
     public class Child extends Parent {

@@ -66,5 +66,7 @@ public class DefaultMethodExtendsExample {
         ci3.method1();
         ci3.method2();   //자식 인터페이스에서 재정의된 메소드2 호출
         ci3.method3();
+
+        System.out.println("프로그램이 정상적으로 실행됩니다 이진실");
     }
 }

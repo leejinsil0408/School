@@ -1,4 +1,4 @@
-package example.example_Interface.InstanceOf;
+package example_Interface.InstanceOf;
 
 public class Driver {
     public void Drive(Vehicle vehicle) {

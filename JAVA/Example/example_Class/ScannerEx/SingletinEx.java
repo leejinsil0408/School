@@ -1,4 +1,4 @@
-package ScannerEx;
+package example.example_Class.ScannerEx;
 
 public class SingletinEx {
     
