@@ -17,7 +17,6 @@ public class CountingStar {
          */
 
 
-
         // 직각삼각형 만들기
         
         /*
